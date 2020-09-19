@@ -1,20 +1,18 @@
 const express = require("express");
-
+const morgon = require("morgan");
+const path = require("path");
 //express app
 const app = express();
 
 //register view engine
-
 app.set("view engine", "ejs");
 
+//middleware and static files................
+// app.use(express.static("public"));
+app.use(express.static(__dirname + './public'));
 
-app.use((req, res, next) => {
-  console.log('new request is made')
-  console.log('host:', req.hostname)
-  console.log('path:', req.path)
-  console.log('method:', req.method)
-  next()
-})
+app.use(morgon("dev"));
+
 app.get("/", (req, res) => {
   const blogs = [{
       title: "computer science is evolving",
@@ -35,7 +33,7 @@ app.get("/", (req, res) => {
     {
       title: "javascript is love",
       description: "loream ais the party where wqe sfjhihfb oeehgiohg ouh",
-    }
+    },
   ];
   res.render("index", {
     title: "Home",
