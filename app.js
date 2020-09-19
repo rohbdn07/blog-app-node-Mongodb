@@ -8,8 +8,7 @@ const app = express();
 app.set("view engine", "ejs");
 
 app.get("/", (req, res) => {
-  const blogs = [
-    {
+  const blogs = [{
       title: "computer science is evolving",
       description: "loream ais the party where wqe sfjhihfb oeehgiohg ouh",
     },
