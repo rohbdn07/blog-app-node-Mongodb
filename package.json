@@ -1,19 +1,26 @@
 {
-  "name": "code-practice",
+  "name": "nodejs",
   "version": "1.0.0",
-  "description": "",
+  "description": "creating simple blog app using node,mangodb",
   "main": "app.js",
-  "dependencies": {
-    "ejs": "^3.1.5",
-    "express": "^4.17.1",
-    "lodash": "^4.17.20"
-  },
-  "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rohbdn07/blog-app-node-Mangodb.git"
+  },
+  "author": "Rohit bhandari",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rohbdn07/blog-app-node-Mangodb/issues"
+  },
+  "homepage": "https://github.com/rohbdn07/blog-app-node-Mangodb#readme",
+  "dependencies": {
+    "ejs": "^3.1.5",
+    "express": "^4.17.1",
+    "lodash": "^4.17.20",
+    "nodemon": "^2.0.4"
+  }
 }
