@@ -20,6 +20,14 @@ app.get("/", (req, res) => {
       title: "javascript is love",
       description: "loream ais the party where wqe sfjhihfb oeehgiohg ouh",
     },
+    {
+      title: "javascript is love",
+      description: "loream ais the party where wqe sfjhihfb oeehgiohg ouh",
+    },
+    {
+      title: "javascript is love",
+      description: "loream ais the party where wqe sfjhihfb oeehgiohg ouh",
+    }
   ];
   res.render("index", {
     title: "Home",
