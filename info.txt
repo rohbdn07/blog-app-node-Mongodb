@@ -1,0 +1,14 @@
+REQUEST TYPES IN NODE JS:
+
+Localhost:3000/blogs => GET method
+
+Localhost:3000/blogs/create => GET method
+
+Localhost:3000/blogs => POST method
+
+Localhost:3000/blogs/:id => GET method
+
+Localhost:3000/blogs/:id => DELETE method
+
+Localhost:3000/blogs/:id => PUT method
+ 
