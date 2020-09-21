@@ -14,7 +14,7 @@ const app = express();
 app.listen(3000);
 //connect to Mangodb...
 const dbURI =
-  "mongodb+srv://<dbuser>:<password>@cluster0.bgjzr.mongodb.net/<dbname>?retryWrites=true&w=majority";
+  'PUT YOUR MONGODB URL HERE'
 mangoose
   .connect(dbURI, {
     useNewUrlParser: true,
@@ -41,66 +41,59 @@ app.use(
 app.use(morgon("dev"));
 
 //mangoose and mango sandbox route
-app.get("/add-blog", (req, res) => {
-  const blog = new Blog({
-    title: "new blog 2",
-    description: "this is a description",
-    body: "We are here to write something",
-  });
-  blog
-    .save()
-    .then((result) => {
-      res.send(result);
-    })
-    .catch((err) => {
-      console.log("connection is db unsuccess", err);
-    });
-});
+// app.get("/add-blog", (req, res) => {
+//   const blog = new Blog({
+//     title: "new blog 2",
+//     description: "this is a description",
+//     body: "We are here to write something",
+//   });
+//   blog
+//     .save()
+//     .then((result) => {
+//       res.send(result);
+//     })
+//     .catch((err) => {
+//       console.log("connection is db unsuccess", err);
+//     });
+// });
 
-app.get('/all-blogs', (req, res) => {
-  Blog.find().then((result) => {
-    res.send(result)
-  }).catch((err) => {
-    console.log(err)
-  })
-})
+// app.get('/all-blogs', (req, res) => {
+//   Blog.find().then((result) => {
+//     res.send(result)
+//   }).catch((err) => {
+//     console.log(err)
+//   })
+// })
 
-app.get('/one-blog', (req, res) => {
-  Blog.findById('5f6900f22a2cf12cb88b8f15').then((Data) => {
-    res.send(Data)
-  }).catch((err) => {
-    console.log(err)
-  })
-})
+// app.get('/one-blog', (req, res) => {
+//   Blog.findById('_id').then((Data) => {
+//     res.send(Data)
+//   }).catch((err) => {
+//     console.log(err)
+//   })
+// })
 
+
+//routes...
 app.get("/", (req, res) => {
-  const blogs = [{
-      title: "computer science is evolving",
-      description: "loream ais the party where wqe sfjhihfb oeehgiohg ouh",
-    },
-    {
-      title: "programming is evolving",
-      description: "loream ais the party where wqe sfjhihfb oeehgiohg ouh",
-    },
-    {
-      title: "javascript is love",
-      description: "loream ais the party where wqe sfjhihfb oeehgiohg ouh",
-    },
-    {
-      title: "javascript is love",
-      description: "loream ais the party where wqe sfjhihfb oeehgiohg ouh",
-    },
-    {
-      title: "javascript is love",
-      description: "loream ais the party where wqe sfjhihfb oeehgiohg ouh",
-    },
-  ];
-  res.render("index", {
-    title: "Home",
-    blogs: blogs,
-  });
+  res.redirect('/blogs')
+
 });
 
+//displaying all blogs stored in db...
+app.get('/blogs', (req, res) => {
+  Blog.find().sort({
+    createdAt: -1 //blog will display in decending order.
+  }).then((data) => {
+    res.render("index", {
+      title: "All blogs",
+      blogs: data
+    });
+  }).catch((err) => {
+    console.log('unable to get blogs', err)
+    res.send('Opps! something went wrong', err)
+  })
+})
 app.get("/about", (req, res) => {
   res.render("about", {
     title: "About",
