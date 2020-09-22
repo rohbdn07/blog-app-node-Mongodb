@@ -122,13 +122,27 @@ app.post("/blogs", (req, res) => {
     });
 });
 
-
 //this is create route...
 app.get("/blogs/create", (req, res) => {
   res.render("create", {
     title: "Create",
   });
 });
+
+app.get('/blogs/:id', (req, res) => {
+  const id = req.params.id;
+
+  Blog.findById(id).then((data) => {
+    res.render('details', {
+      title: 'Blog details',
+      blog: data
+    })
+  }).catch((err) => console.log(err))
+
+
+})
+
+
 
 
 //if NO routes is matched above.
@@ -137,5 +151,5 @@ app.get("/blogs/create", (req, res) => {
 app.use((req, res) => {
   res.status(404).render("404", {
     title: "Error",
-  });
-});
+  })
+})

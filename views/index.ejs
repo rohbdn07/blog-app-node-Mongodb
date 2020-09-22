@@ -10,7 +10,8 @@
     <div class="shadow-sm p-3 mb-5 bg-light rounded text-black">
       <h3 class="title"><%= blog.title %></h3>
       <p class="snippet text-muted"><%= blog.description %></p>
-      <a class="btn btn-danger btn-sm" href="#" role="button">Read more</a>
+      <a class="btn btn-primary btn-sm" href="/blogs/<%=blog._id %>" role="button">Read more</a>
+      <button class="btn btn-danger btn-sm" role="button">Delete </button>
       <hr class="my-4" />
     </div>
     <% }) %> <% } else { %>
