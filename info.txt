@@ -11,4 +11,6 @@ Localhost:3000/blogs/:id => GET method
 Localhost:3000/blogs/:id => DELETE method
 
 Localhost:3000/blogs/:id => PUT method
+
+/blogs/:id=> this is route parameters. the variable parts of  the route that may change value.
  

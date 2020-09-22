@@ -7,3 +7,24 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
     integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous">
 </script>
+
+
+
+<script>
+    //DELETE function present in Details page...
+    const remove = document.querySelector('a.btn');
+    remove.addEventListener('click', (e) => {
+        const endPoint = `/blogs/${remove.dataset.doc}`;
+        //doing Ajax request to Server to delete...
+        fetch(endPoint, {
+                method: 'DELETE'
+            }).then((response) => response.json())
+
+            .then((data) => {
+
+                window.location.href = data.redirect
+            })
+            .catch((err) => console.log(err))
+
+    })
+</script>
