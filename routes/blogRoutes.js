@@ -1,13 +1,9 @@
 const express = require('express');
-const router = express.Router;
+const router = express.Router();
 const Blog = require("../models/blog");
 
 
 //Routes....
-//this is route to home(index page)
-router.get("/", (req, res) => {
-    res.redirect("/blogs");
-});
 
 //displaying all blogs on index page(home page) using GET method,
 //which are stored in mongodb..
@@ -28,10 +24,22 @@ router.get("/blogs", (req, res) => {
         });
 });
 
+//this is route to home(index page)
+router.get("/", (req, res) => {
+    res.redirect("/blogs");
+});
+
 //This is About route...
 router.get("/about", (req, res) => {
     res.render("about", {
         title: "About",
+    });
+});
+
+//this is Create route...
+router.get("/blogs/create", (req, res) => {
+    res.render("create", {
+        title: "Create",
     });
 });
 
@@ -50,12 +58,6 @@ router.post("/blogs", (req, res) => {
         });
 });
 
-//this is Create route...
-router.get("/blogs/create", (req, res) => {
-    res.render("create", {
-        title: "Create",
-    });
-});
 
 // this is single blog page route pass through '/blogs/:id'...
 router.get("/blogs/:id", (req, res) => {

@@ -1,7 +1,8 @@
 const express = require("express");
 const morgon = require("morgan");
-const blogRoutes = require('./routes/blogRoutes')
+const blogRoutes = require("./routes/blogRoutes");
 const path = require("path");
+const router = express.Router();
 const mangoose = require("mongoose");
 const bodyParser = require("body-parser");
 const _ = require("lodash");
@@ -13,7 +14,8 @@ const app = express();
 app.listen(3000);
 
 //connect to Mangodb...
-const dbURI = "PUT YOUR MONGODB URL HERE";
+const dbURI =
+  "YOUR MONGODB URI GOES HERE";
 mangoose
   .connect(dbURI, {
     useNewUrlParser: true,
@@ -37,13 +39,17 @@ app.use(
 );
 
 //middleware and static files................
-app.use(express.static("public"));
-// app.use(express.static(__dirname + './public'));
+app.use(express.static(path.join(__dirname, "public")));
+
 app.use(morgon("dev"));
 
-//routes
-app.use(blogRoutes)
 
+//blog routes
+app.use(blogRoutes);
+
+
+
+//404 page...
 //if NO routes is matched in blogRoutes.js file.
 //It will display 404 error page to user.
 //It MUST be placed at end of the router.js

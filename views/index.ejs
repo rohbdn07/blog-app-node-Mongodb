@@ -2,22 +2,23 @@
 <html lang="en">
 <%- include('./partials/head.ejs') %>
 
-<body>
+<body class="bg_color">
   <%-include('./partials/nav.ejs') %>
-  <h2>All Blogs</h2>
-  <div class="blogs content mt-5 w-75 m-5">
-    <% if (blogs.length > 0) { %> <% blogs.forEach(blog => { %>
-    <div class="shadow-sm p-3 mb-5 bg-light rounded text-black">
-      <h3 class="title"><%= blog.title %></h3>
-      <p class="snippet text-muted"><%= blog.description %></p>
-      <a class="btn btn-sm btn-outline-info" href="/blogs/<%=blog._id %>">Read more</a>
-      <hr class="my-4" />
+  <div class="bg_image ">
+    <h2>All Blogs</h2>
+    <div class="blogs content mt-5 w-75 m-5  ">
+      <% if (blogs.length > 0) { %> <% blogs.forEach(blog => { %>
+      <div class="shadow p-3 mb-5 bg-black border border-info rounded text-white">
+        <h3 class="title"><%= blog.title %></h3>
+        <p class="snippet text-muted"><%= blog.description %></p>
+        <a class="btn btn-sm btn-outline-info" href="/blogs/<%=blog._id %>">Read more</a>
+        <hr class="my-4" />
+      </div>
+      <% }) %> <% } else { %>
+      <p>There are no blogs to display... <br> Create a new post.</p>
+      <% } %>
     </div>
-    <% }) %> <% } else { %>
-    <p>There are no blogs to display... <br> Create a new post.</p>
-    <% } %>
   </div>
-
   <%- include('./partials/footer.ejs') %>
 </body>
 
