@@ -14,8 +14,7 @@ const app = express();
 app.listen(3000);
 
 //connect to Mangodb...
-const dbURI =
-  "YOUR MONGODB URI GOES HERE";
+const dbURI = "YOUR MONGODB URI GOES HERE";
 mangoose
   .connect(dbURI, {
     useNewUrlParser: true,
@@ -43,11 +42,8 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.use(morgon("dev"));
 
-
 //blog routes
 app.use(blogRoutes);
-
-
 
 //404 page...
 //if NO routes is matched in blogRoutes.js file.

@@ -8,6 +8,16 @@ body {
     font-family: 'Quicksand', sans-serif;
 }
 
+.navBar {
+    background-color: #e4525e;
+
+}
+
+.navBar a {
+    color: whitesmoke;
+    font-size: 20px;
+}
+
 /* .bg_image {
 
     width: 100%;
@@ -31,4 +41,11 @@ body {
 
 .details_bg {
     background-color: black;
+}
+
+.blog_image img {
+    display: flex;
+    margin: 0 auto;
+    width: 100vw;
+    height: 40vh;
 }
