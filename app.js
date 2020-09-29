@@ -6,6 +6,7 @@ const router = express.Router();
 const mangoose = require("mongoose");
 const bodyParser = require("body-parser");
 const _ = require("lodash");
+const Uri = require('./mongodb/uri');
 
 //express app
 const app = express();
@@ -15,7 +16,7 @@ app.listen(3000);
 
 //connect to Mangodb...
 const dbURI =
-  "YOUR MONGODB URI GOES HERE";
+  Uri;
 mangoose
   .connect(dbURI, {
     useNewUrlParser: true,
