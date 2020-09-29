@@ -36,6 +36,8 @@ router.get("/about", (req, res) => {
     });
 });
 
+
+
 //this is Create route...
 router.get("/blogs/create", (req, res) => {
     res.render("create", {
@@ -87,5 +89,18 @@ router.delete("/blogs/:id", (req, res) => {
         .catch((err) => console.log(err));
 });
 
+
+router.get("/edit/:id", (req, res) => {
+    const id = req.params.id;
+
+    Blog.findByIdAndUpdate(id)
+        .then((data) => {
+            res.render("edit", {
+                title: "edit blog",
+                blog: data,
+            });
+        })
+        .catch((err) => console.log(err));
+});
 //router is exported to App.js.
 module.exports = router;

@@ -1,51 +1,56 @@
 @import url("https://fonts.googleapis.com/css2?family=Noto+Serif&display=swap");
-@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300&display=swap");
 
 body {
-    /* background-color: black; */
+  /* background-color: black; */
 
-    color: whitesmoke;
-    font-family: 'Quicksand', sans-serif;
+  color: whitesmoke;
+  font-family: "Quicksand", sans-serif;
+  overflow-x: hidden;
 }
 
-.navBar {
-    background-color: #e4525e;
+.nav-color {
+  background-color: #e4525e;
+}
+
+.collapse ul a:hover {
+  border-bottom: 2px solid rgb(23, 8, 109);
+  transform: scaleX(1.06);
 
 }
 
-.navBar a {
-    color: whitesmoke;
-    font-size: 20px;
-}
-
-/* .bg_image {
-
-    width: 100%;
-    background-image: url('../images/image02.jfif');
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    opacity: 70%;
-    z-index: -100;
-} */
-
-/* .bg_image {
-    background: rgb(2, 0, 36);
-    background: linear-gradient(90deg, rgba(2, 0, 36, 0.5942752100840336) 0%, rgba(4, 22, 58, 1) 0%, rgba(7, 57, 93, 1) 60%, rgba(8, 68, 110, 1) 71%, rgba(9, 75, 121, 1) 79%, rgba(0, 212, 255, 1) 100%);
-} */
 
 .bg_color {
-    background: rgb(2, 0, 36) !important;
-    background: linear-gradient(90deg, rgba(2, 0, 36, 0.5942752100840336) 0%, rgba(4, 22, 58, 1) 0%, rgba(7, 57, 93, 1) 58%, rgba(9, 53, 82, 1) 100%, rgba(9, 75, 121, 1) 100%, rgba(2, 65, 78, 1) 100%) !important;
+  background: rgb(2, 0, 36) !important;
+  background: linear-gradient(90deg,
+      rgba(2, 0, 36, 0.5942752100840336) 0%,
+      rgba(4, 22, 58, 1) 0%,
+      rgba(7, 57, 93, 1) 58%,
+      rgba(9, 53, 82, 1) 100%,
+      rgba(9, 75, 121, 1) 100%,
+      rgba(2, 65, 78, 1) 100%) !important;
 }
 
 .details_bg {
-    background-color: black;
+  background-color: white;
 }
 
 .blog_image img {
-    display: flex;
-    margin: 0 auto;
-    width: 100vw;
-    height: 40vh;
+  width: 100vw;
+  height: 40vh;
+}
+
+.wid {
+  height: 400px;
+  width: 900px;
+}
+
+.center {
+  display: flex;
+  margin: 0 auto;
+  flex-wrap: wrap;
+}
+
+strong {
+  color: white;
 }

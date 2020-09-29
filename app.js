@@ -14,7 +14,8 @@ const app = express();
 app.listen(3000);
 
 //connect to Mangodb...
-const dbURI = "YOUR MONGODB URI GOES HERE";
+const dbURI =
+  "YOUR MONGODB URI GOES HERE";
 mangoose
   .connect(dbURI, {
     useNewUrlParser: true,
