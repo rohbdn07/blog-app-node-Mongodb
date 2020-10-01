@@ -3,55 +3,50 @@
 <%- include('./partials/head.ejs') %>
 
 <body class="details_bg">
+  <%-include('./partials/nav.ejs') %>
+  <br />
 
-    <%-include('./partials/nav.ejs') %>
-    <br>
+  <div class="deleteIcon">
+    <a class="btn btn-outline-danger w-25 d-flex justify-content-sm-end" data-doc="<%=blog._id%>"
+      role="button">Delete</a>
+  </div>
+  <br />
+  <!-- //Carousel images -->
+  <%-include('./partials/carousel.ejs') %>
+  <br />
+  <div class="blogs content mt-5 text-center text-dark container">
+    <h1 class="display-3 text-primary"><%=blog.title%></h1>
+    <br />
+    <h5><%= blog.description%></h5>
+    <h6 class="grey-text"> Published at :<%= blog.createdAt%></h6>
+    <br />
+    <h3><%= blog.body%></h3>
+  </div>
 
-    <div class="deleteIcon ">
-        <a class="btn btn-outline-danger w-25 d-flex justify-content-sm-end  " data-doc='<%=blog._id%>'
-            role="button">Delete</a>
-    </div>
-    <br>
-    <!-- //Carousel images -->
-    <%-include('./partials/carousel.ejs') %>
-    <br>
-    <div class="blogs content mt-5 text-center text-dark container">
-        <h1 class="display-3 text-primary"><%=blog.title%></h1>
-        <br>
-        <h5><%= blog.description%> </h5>
-        <br>
-        <h3><%= blog.body%> </h3>
-    </div>
+  <!-- Footer of the page -->
+  <%- include('./partials/footer.ejs') %>
 
-    <!-- Footer of the page -->
-    <%- include('./partials/footer.ejs') %>
+  <script>
+    //DELETE function. It 1st take the given element and assign it to variable.then,
+    //run the Click EventListener and assign the variable the Endpont('/blogs/:id'), then
+    //run fetch method() to request the server to delete the 'Clicked item'
 
-    <script>
-        //DELETE function. It 1st take the given element and assign it to variable.then,
-        //run the Click EventListener and assign the variable the Endpont('/blogs/:id'), then
-        //run fetch method() to request the server to delete the 'Clicked item'
-
-        const remove = document.querySelector('a.btn');
-        remove.addEventListener('click', (e) => {
-            const endPoint = `/blogs/${remove.dataset.doc}`;
-            //doing Ajax request to Server to delete...
-            fetch(endPoint, {
-                    method: 'DELETE'
-                }).then((response) => response
-                    .json()
-                ) //got the responce back from server after deleted the item, and converted it into JSON format.
-
-                .then((data) => {
-
-                    window.location.href = data
-                        .redirect // then, redirected the responce(data) to index page.
-                })
-                .catch((err) => console.log(err))
-
+    const remove = document.querySelector("a.btn");
+    remove.addEventListener("click", (e) => {
+      const endPoint = `/blogs/${remove.dataset.doc}`;
+      //doing Ajax request to Server to delete...
+      fetch(endPoint, {
+          method: "DELETE",
         })
-    </script>
+        .then((response) => response
+      .json()) //got the responce back from server after deleted the item, and converted it into JSON format.
 
-
+        .then((data) => {
+          window.location.href = data.redirect; // then, redirected the responce(data) to index page.
+        })
+        .catch((err) => console.log(err));
+    });
+  </script>
 </body>
 
 <%- include('./partials/scriptTag.ejs') %>

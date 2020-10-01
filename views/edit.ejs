@@ -13,22 +13,24 @@
 
         <div class="form-group">
             <label for="title">Blog's title</label>
-            <input type="text" class="form-control" id="title" name='title' />
+            <input type="text" class="form-control" id="title" name="title" value="<%=blog.title %>" />
             <small id="emailHelp" class="form-text text-muted">Write what you like to...</small>
         </div>
         <div class="form-group">
             <label for="description">Blog's description</label>
-            <input type="text" class="form-control" id="description" name="description" />
+            <input type="text" class="form-control" id="description" name="description"
+                value="<%=blog.description %>" />
         </div>
         <div class="form-group">
             <label for="body">Blog Content</label>
-            <textarea class="form-control" type='text' id="body" name='body' rows="3"></textarea>
+            <textarea class="form-control" type='text' id="body" name='body' rows="3"
+                value="<%=blog.body %>"></textarea>
         </div>
         <div class="form-group form-check">
             <input type="checkbox" class="form-check-input" id="exampleCheck1" />
             <label class="form-check-label" for="exampleCheck1">Set Public post</label>
         </div>
-        <button type="submit" class="btn btn-danger">Submit</button>
+        <button type="submit" class="btn btn-danger">Update</button>
     </form>
     <%- include('./partials/footer.ejs') %>
 </body>

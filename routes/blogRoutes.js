@@ -58,36 +58,53 @@ router.post("/blogs", (req, res) => {
         .catch((err) => {
             console.log(err);
         });
+
+
 });
 
 
 // this is single blog page route pass through '/blogs/:id'...
-router.get("/blogs/:id", (req, res) => {
+// router.get("/blogs/:id", (req, res) => {
+//     const id = req.params.id;
+
+//     Blog.findById(id)
+//         .then((data) => {
+//             res.render("details", {
+//                 title: "Blog details",
+//                 blog: data,
+//             });
+//         })
+//         .catch((err) => console.log(err));
+// });
+
+// this is single blog page route pass through '/blogs/:id'...
+router.get("/blogs/:id", async (req, res) => {
     const id = req.params.id;
 
-    Blog.findById(id)
-        .then((data) => {
-            res.render("details", {
-                title: "Blog details",
-                blog: data,
-            });
-        })
-        .catch((err) => console.log(err));
+    const blog = await Blog.findById(id)
+    try {
+        res.render("details", {
+            title: "Blog details",
+            blog: blog,
+        });
+    } catch {
+        (err) => console.log(err);
+    }
 });
 
 //this is Delete route
 //it 1st delete the blog of that ID in mongodb . then,
 //send the response in JSON format and redirect it to '/blogs' route.
 router.delete("/blogs/:id", (req, res) => {
-    const id = req.params.id;
-    Blog.findByIdAndDelete(id)
-        .then(() => {
-            res.json({
-                redirect: "/blogs"
-            });
-        })
-        .catch((err) => console.log(err));
-});
+        const id = req.params.id;
+        Blog.findByIdAndDelete(id)
+            .then(() =>
+                res.json({
+                    redirect: "/blogs"
+                }));
+    })
+    .catch((err) => console.log(err));
+
 
 
 router.get("/edit/:id", (req, res) => {
