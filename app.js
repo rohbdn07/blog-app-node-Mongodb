@@ -6,7 +6,8 @@ const router = express.Router();
 const mangoose = require("mongoose");
 const bodyParser = require("body-parser");
 const _ = require("lodash");
-const Uri = require('./mongodb/uri');
+const Uri = require("./mongodb/uri");
+const fileUpload = require("express-fileupload");
 
 //express app
 const app = express();
@@ -15,8 +16,7 @@ const app = express();
 app.listen(5000);
 
 //connect to Mangodb...
-const dbURI =
-  Uri;
+const dbURI = Uri;
 mangoose
   .connect(dbURI, {
     useNewUrlParser: true,
@@ -32,12 +32,16 @@ app.set("view engine", "ejs");
  * Parses the text as URL encoded data (which is how browsers tend to send form data from regular forms set to POST)
  * and exposes the resulting object (containing the keys and values) on req.body
  */
+
 app.use(bodyParser.json());
 app.use(
   bodyParser.urlencoded({
     extended: true,
   })
 );
+
+//FileUpload middleware
+app.use(fileUpload());
 
 //middleware and static files................
 app.use(express.static(path.join(__dirname, "public")));

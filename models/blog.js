@@ -3,31 +3,35 @@ const mongoose = require("mongoose");
 //Schema represent the database's structure and it's contents.
 const Schema = mongoose.Schema;
 
-const blogSchema = new Schema({
+const blogSchema = new Schema(
+  {
     username: {
-        type: String,
-        required: true,
+      type: String,
+      required: true,
     },
     title: {
-        type: String,
-        required: true,
+      type: String,
+      required: true,
     },
     description: {
-        type: String,
+      type: String,
 
-        required: true,
+      required: true,
     },
     body: {
-        type: String,
-        required: true,
+      type: String,
+      required: true,
     },
+    image: String,
     createdAt: {
-        type: Date,
-        default: new Date().toString(),
-    }
-}, {
+      type: Date,
+      default: new Date().toString(),
+    },
+  },
+  {
     timestamps: true,
-});
+  }
+);
 
 //inside mongoose.model('blog')=>'blog'represent the singular form of database.
 //name(mongodb will search pular name of 'blog' in db)

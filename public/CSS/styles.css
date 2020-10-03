@@ -7,6 +7,7 @@ body {
   color: whitesmoke;
   font-family: "Quicksand", sans-serif;
   overflow-x: hidden;
+
 }
 
 .nav-color {
@@ -43,6 +44,24 @@ body {
 .wid {
   height: 400px;
   width: 900px;
+}
+
+.upload-image {
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  margin: 0 auto;
+}
+
+.index__image {
+  width: 100%;
+  height: 250px;
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  margin: 0 auto;
+
+
 }
 
 .center {
