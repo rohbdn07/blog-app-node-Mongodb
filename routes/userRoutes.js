@@ -15,6 +15,7 @@ router.get('/login', (req, res, next) => {
 router.get('/register', (req, res, next) => {
     res.render("register", {
         title: "registerPage",
+        msg: '',
     })
 })
 
@@ -33,9 +34,9 @@ router.post("/register", (req, res, next) => {
     userDetails.save((err, data) => {
         console.log(data)
         if (err) throw err;
-        res.render("/register", {
+        res.render("register", {
             title: 'login authication',
-            msg: '',
+            msg: 'User registered successfully',
         })
     })
 
