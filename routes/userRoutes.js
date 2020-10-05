@@ -1,8 +1,8 @@
 const express = require("express");
 const router = express.Router();
 const path = require("path");
-const Blog = require("../models/blog");
 const User = require("../models/user");
+const checkDuplicateEmail = require('../AuthMiddleware.js/Auth')
 
 //this is Login route page...
 router.get('/login', (req, res, next) => {
@@ -20,7 +20,7 @@ router.get('/register', (req, res, next) => {
 })
 
 //register POST to database...
-router.post("/register", (req, res, next) => {
+router.post("/register", checkDuplicateEmailorUsername, (req, res, next) => {
     const username = req.body.username;
     const email = req.body.email;
     const password = req.body.password;
@@ -37,7 +37,8 @@ router.post("/register", (req, res, next) => {
         res.render("register", {
             title: 'login authication',
             msg: 'User registered successfully',
-        })
+        });
+
     })
 
 
