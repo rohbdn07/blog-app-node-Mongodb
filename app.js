@@ -1,12 +1,13 @@
 const express = require("express");
 const morgon = require("morgan");
 const blogRoutes = require("./routes/blogRoutes");
+const userRoutes = require("./routes/userRoutes");
 const path = require("path");
 const router = express.Router();
 const mangoose = require("mongoose");
 const bodyParser = require("body-parser");
 const _ = require("lodash");
-const Uri = require("./mongodb/uri");
+const Uri = require("./config/uri");
 const fileUpload = require("express-fileupload");
 
 //express app
@@ -49,7 +50,10 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(morgon("dev"));
 
 //blog routes
-app.use(blogRoutes);
+app.use(blogRoutes, userRoutes);
+
+// //Login and register routes...
+// app.use(userRoutes);
 
 //404 page...
 //if NO routes is matched in blogRoutes.js file.

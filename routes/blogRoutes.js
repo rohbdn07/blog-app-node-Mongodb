@@ -68,19 +68,7 @@ router.get("/blogs/create", (req, res) => {
   });
 });
 
-//this is Login route page...
-router.get('/login', (req, res, next) => {
-  res.render("login", {
-    title: "loginPage",
-  })
-})
 
-//this is Register route page...
-router.get('/register', (req, res, next) => {
-  res.render("register", {
-    title: "registerPage",
-  })
-})
 
 //this is Create post route, It'll 1st stored the data to mongodb using POST method.
 router.post("/blogs", (req, res) => {
