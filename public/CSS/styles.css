@@ -20,15 +20,13 @@ body {
 
 .bg_color {
   background: rgb(2, 0, 36) !important;
-  background: linear-gradient(
-    90deg,
-    rgba(2, 0, 36, 0.5942752100840336) 0%,
-    rgba(4, 22, 58, 1) 0%,
-    rgba(7, 57, 93, 1) 58%,
-    rgba(9, 53, 82, 1) 100%,
-    rgba(9, 75, 121, 1) 100%,
-    rgba(2, 65, 78, 1) 100%
-  ) !important;
+  background: linear-gradient(90deg,
+      rgba(2, 0, 36, 0.5942752100840336) 0%,
+      rgba(4, 22, 58, 1) 0%,
+      rgba(7, 57, 93, 1) 58%,
+      rgba(9, 53, 82, 1) 100%,
+      rgba(9, 75, 121, 1) 100%,
+      rgba(2, 65, 78, 1) 100%) !important;
 }
 
 .details_bg {
@@ -51,6 +49,7 @@ body {
   background-repeat: no-repeat;
   margin: 0 auto;
 }
+
 .user_image {
   width: 50px;
   height: 70px;
