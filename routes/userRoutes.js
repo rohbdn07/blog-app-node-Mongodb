@@ -2,22 +2,23 @@ const express = require("express");
 const router = express.Router();
 const path = require("path");
 const User = require("../models/user");
-const checkDuplicateEmail = require('../AuthMiddleware.js/Auth')
+const checkDuplicateEmailorUsername = require("../AuthMiddleware/Auth");
+const bcrypt = require("bcryptjs");
 
 //this is Login route page...
-router.get('/login', (req, res, next) => {
+router.get("/login", (req, res, next) => {
     res.render("login", {
         title: "loginPage",
-    })
-})
+    });
+});
 
 //this is Register route page...
-router.get('/register', (req, res, next) => {
+router.get("/register", (req, res, next) => {
     res.render("register", {
         title: "registerPage",
-        msg: '',
-    })
-})
+        msg: "",
+    });
+});
 
 //register POST to database...
 router.post("/register", checkDuplicateEmailorUsername, (req, res, next) => {
@@ -28,32 +29,26 @@ router.post("/register", checkDuplicateEmailorUsername, (req, res, next) => {
 
     if (password !== confirmpassword) {
         res.render("register", {
-            title: 'login authication',
-            msg: 'Passoword not matched ',
+            title: "login authication",
+            msg: "Passoword not matched ",
         });
     } else {
+        const hashedPassword = bcrypt.hashSync(req.body.password, 10);
         const userDetails = new User({
             username: username,
             email: email,
-            password: password
+            password: hashedPassword,
         });
         userDetails.save((err, data) => {
-            console.log(data)
+            console.log(data);
             if (err) throw err;
             res.render("register", {
-                title: 'login authication',
-                msg: 'User registered successfully',
+                title: "login authication",
+                msg: "User registered successfully",
             });
-
-        })
-
+        });
     }
-
-
-
-
-
-})
+});
 
 //router is exported to App.js.
 module.exports = router;
