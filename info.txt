@@ -14,3 +14,7 @@ Localhost:3000/blogs/:id => PUT method
 
 /blogs/:id=> this is route parameters. the variable parts of  the route that may change value.
  
+
+ <% if(msg != '') {%> -->
+    <%=msg%>
+    <%}%> 

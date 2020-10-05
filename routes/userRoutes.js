@@ -17,5 +17,10 @@ router.get('/register', (req, res, next) => {
     })
 })
 
+//register POST to database...
+router.post("/register", (req, res, next) => {
+
+})
+
 //router is exported to App.js.
 module.exports = router;
