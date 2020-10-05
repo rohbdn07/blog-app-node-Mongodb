@@ -30,25 +30,32 @@
         There are no blogs to display... <br />
         Create a new post.
       </p>
-      <% } %> <%- include('./partials/footer.ejs') %>
-    </div>
+      <% } %>
 
+    </div>
+    <!-- //User Profile..... -->
     <div class="jumbotron mt-5 m-5 w-25 h-25 ">
       <h2 class="text-dark">User Profile</h2>
       <br />
       <div class="shadow p-3 mb-5 border border-info rounded text-dark">
         <h1 class="display-4"><%=blogs.username %></h1>
-        <p class="lead">User name : Rohit Bhandari<%= blogs.username %></p>
-        <p class="lead">Published at :<%= blogs.createdAt %></p>
+        <% if (blogs.length > 0 || blogs.length==0) {%>
+        <p class="lead"><%= blogs[0].username %></p>
+
         <a class="btn btn-dark btn-md" href="#">FACEBOOK</a>
         <a class="btn btn-danger btn-md" href="#">GITHUB</a>
+        <%} %>
         <hr class="my-4" />
       </div>
     </div>
+
   </div>
+  <%- include('./partials/footer.ejs') %>
 </body>
 
+
 <%- include('./partials/scriptTag.ejs') %>
+
 <script>
   const moment = require("moment");
 </script>

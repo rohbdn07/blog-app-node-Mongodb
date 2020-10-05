@@ -17,6 +17,7 @@ router.get("/blogs", (req, res) => {
         title: "All blogs",
         blogs: data,
       });
+
     })
     .catch((err) => {
       console.log("unable to get blogs", err);
@@ -35,8 +36,7 @@ router.post("/blogs", (req, res) => {
     if (err) {
       console.log("there is an error" + err);
     } else {
-      Blog.create(
-        {
+      Blog.create({
           ...req.body,
           image: `/posts/${filename}`,
         },
@@ -67,6 +67,20 @@ router.get("/blogs/create", (req, res) => {
     title: "Create",
   });
 });
+
+//this is Login route page...
+router.get('/login', (req, res, next) => {
+  res.render("login", {
+    title: "loginPage",
+  })
+})
+
+//this is Register route page...
+router.get('/register', (req, res, next) => {
+  res.render("register", {
+    title: "registerPage",
+  })
+})
 
 //this is Create post route, It'll 1st stored the data to mongodb using POST method.
 router.post("/blogs", (req, res) => {

@@ -7,29 +7,28 @@ body {
   color: whitesmoke;
   font-family: "Quicksand", sans-serif;
   overflow-x: hidden;
-
 }
 
 .nav-color {
-  background-color: #e4525e;
+  background-color: black;
 }
 
 .collapse ul a:hover {
-  border-bottom: 2px solid rgb(23, 8, 109);
+  border-bottom: 2px solid whitesmoke;
   transform: scaleX(1.06);
-
 }
-
 
 .bg_color {
   background: rgb(2, 0, 36) !important;
-  background: linear-gradient(90deg,
-      rgba(2, 0, 36, 0.5942752100840336) 0%,
-      rgba(4, 22, 58, 1) 0%,
-      rgba(7, 57, 93, 1) 58%,
-      rgba(9, 53, 82, 1) 100%,
-      rgba(9, 75, 121, 1) 100%,
-      rgba(2, 65, 78, 1) 100%) !important;
+  background: linear-gradient(
+    90deg,
+    rgba(2, 0, 36, 0.5942752100840336) 0%,
+    rgba(4, 22, 58, 1) 0%,
+    rgba(7, 57, 93, 1) 58%,
+    rgba(9, 53, 82, 1) 100%,
+    rgba(9, 75, 121, 1) 100%,
+    rgba(2, 65, 78, 1) 100%
+  ) !important;
 }
 
 .details_bg {
@@ -41,9 +40,9 @@ body {
   height: 40vh;
 }
 
-.wid {
-  height: 400px;
-  width: 900px;
+.details__carousel {
+  height: 250px;
+  width: 1000px;
 }
 
 .upload-image {
@@ -51,6 +50,10 @@ body {
   background-size: cover;
   background-repeat: no-repeat;
   margin: 0 auto;
+}
+.user_image {
+  width: 50px;
+  height: 70px;
 }
 
 .index__image {
@@ -60,8 +63,6 @@ body {
   background-size: cover;
   background-repeat: no-repeat;
   margin: 0 auto;
-
-
 }
 
 .center {
