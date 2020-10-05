@@ -1,65 +1,97 @@
 <!DOCTYPE html>
 <html lang="en">
-<%- include('./partials/head.ejs') %>
+  <%- include('./partials/head.ejs') %>
 
-<body class="details_bg">
+  <body class="details_bg">
     <%- include('./partials/nav.ejs') %>
 
-    <form action="/register" method="POST" enctype="multipart/form-data"
-        class="p-5 mt-5 w-50 justify-content-center mx-auto text-light bg_color">
+    <form
+      action="/register"
+      method="POST"
+      enctype="multipart/form-data"
+      class="p-5 mt-5 w-50 justify-content-center mx-auto text-light bg_color"
+    >
+      <% if(msg != '') {%>
+      <p style="text-align: center"><%=msg%></p>
+      <%}%>
+      <div class="text-center mt-3">
+        <h2 class="display-4">Admin Register</h2>
+      </div>
 
-        <% if(msg != '') {%>
-        <p style='text-align:center'>
-            <%=msg%>
+      <div class="form-group">
+        <label for="username"><strong>Admin Username</strong> </label>
+        <input
+          type="text"
+          class="form-control"
+          id="username"
+          name="username"
+          required
+        />
+        <div id="registeralert" style="display: none">
+          <p>Error:</p>
+          <span></span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="email"><strong>Email</strong></label>
+        <input
+          type="email"
+          class="form-control"
+          id="email"
+          name="email"
+          required
+        />
+        <div id="registeralert" style="display: none">
+          <p>Error:</p>
+          <span></span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="password"><strong>Password</strong> </label>
+        <input
+          type="password"
+          class="form-control"
+          id="password"
+          name="password"
+          required
+        />
+        <small id="emailHelp" class="form-text text-muted"
+          >Write what you like to...</small
+        >
+        <div id="registeralert" style="display: none">
+          <p>Error:</p>
+          <span></span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="confirm password"><strong>Confirm Password</strong></label>
+        <input
+          type="password"
+          class="form-control"
+          id="confirmpassword"
+          name="confirmpassword"
+          required
+        />
+        <div id="registeralert" style="display: none">
+          <p>Error:</p>
+          <span></span>
+        </div>
+      </div>
+      <div action="/login" class="text-center">
+        <p>
+          Already have an account? then,
+          <a class="text-center" href="/login"
+            ><strong> Click to Login</strong></a
+          >
         </p>
-        <%}%> 
-        <div class="text-center mt-3">
-            <h2 class="display-4">Admin Register</h2>
-        </div>
-
-        <div class="form-group">
-            <label for="username"><strong>Admin Username</strong> </label>
-            <input type="text" class="form-control" id="username" name="username" required />
-            <div id="registeralert" style="display: none;">
-                <p>Error:</p>
-                <span></span>
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label for="email"><strong>Email</strong></label>
-            <input type="email" class="form-control" id="email" name="email" required />
-            <div id="registeralert" style="display: none;">
-                <p>Error:</p>
-                <span></span>
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="password"><strong>Password</strong> </label>
-            <input type="password" class="form-control" id="password" name="password" required />
-            <small id="emailHelp" class="form-text text-muted">Write what you like to...</small>
-            <div id="registeralert" style="display: none;">
-                <p>Error:</p>
-                <span></span>
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="confirm password"><strong>Confirm Password</strong></label>
-            <input type="password" class="form-control" id="confirmpassword" name="confirmpassword" required />
-            <div id="registeralert" style="display: none;">
-                <p>Error:</p>
-                <span></span>
-            </div>
-        </div>
-        <div action='/login' class="text-center">
-            <p>Already have an account? then, <a class="text-center" href="/login"><strong> Click to
-                        Login</strong></a>
-            </p>
-        </div>
-        <button type="submit" class="btn btn-danger">Submit</button>
+      </div>
+      <button type="submit" class="btn btn-danger">Submit</button>
     </form>
 
-    <br>
-    <br>
+    <br />
+    <br />
 
     <%- include('./partials/footer.ejs') %>
+  </body>
+</html>

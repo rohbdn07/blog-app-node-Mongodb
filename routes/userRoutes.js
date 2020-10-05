@@ -26,20 +26,30 @@ router.post("/register", checkDuplicateEmailorUsername, (req, res, next) => {
     const password = req.body.password;
     const confirmpassword = req.body.confirmpassword;
 
-    const userDetails = new User({
-        username: username,
-        email: email,
-        password: password
-    });
-    userDetails.save((err, data) => {
-        console.log(data)
-        if (err) throw err;
+    if (password !== confirmpassword) {
         res.render("register", {
             title: 'login authication',
-            msg: 'User registered successfully',
+            msg: 'Passoword not matched ',
         });
+    } else {
+        const userDetails = new User({
+            username: username,
+            email: email,
+            password: password
+        });
+        userDetails.save((err, data) => {
+            console.log(data)
+            if (err) throw err;
+            res.render("register", {
+                title: 'login authication',
+                msg: 'User registered successfully',
+            });
 
-    })
+        })
+
+    }
+
+
 
 
 
