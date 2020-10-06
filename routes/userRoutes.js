@@ -9,8 +9,37 @@ const bcrypt = require("bcryptjs");
 router.get("/login", (req, res, next) => {
     res.render("login", {
         title: "loginPage",
+        msg: '',
     });
 });
+
+router.post('/login', (req, res, next) => {
+    const username = req.body.username;
+    const email = req.body.email;
+    const password = req.body.password;
+
+    const checkUser = User.findOne({
+        email: email
+    });
+    checkUser.exec((err, data) => {
+
+        if (err) throw err;
+
+        const hashedPassword = data.password;
+        if (bcrypt.compareSync(password, hashedPassword)) {
+            res.render("login", {
+                title: "login authication",
+                msg: "Yay! user logging sucessfully!!!",
+            });
+        } else {
+            res.render("login", {
+                title: "login authication failed",
+                msg: "oops! Username or password not matched",
+            });
+        }
+    })
+
+})
 
 //this is Register route page...
 router.get("/register", (req, res, next) => {
