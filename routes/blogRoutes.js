@@ -8,6 +8,7 @@ const Blog = require("../models/blog");
 //displaying all blogs on index page(home page) using GET method,
 //which are stored in mongodb..
 router.get("/blogs", (req, res) => {
+  let loginUser = localStorage.getItem('loginUser');
   Blog.find()
     .sort({
       createdAt: -1, //blog will display in decending order.
@@ -16,6 +17,7 @@ router.get("/blogs", (req, res) => {
       res.render("index", {
         title: "All blogs",
         blogs: data,
+        loginUser: loginUser,
       });
 
     })

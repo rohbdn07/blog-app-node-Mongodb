@@ -1,19 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
-  <%- include('./partials/head.ejs') %>
+<%- include('./partials/head.ejs') %>
 
-  <body class="details_bg">
-    <%- include('./partials/nav.ejs') %>
+<body class="details_bg">
+  <%- include('./partials/nav.ejs') %>
 
-    <form
-      action="/register"
-      method="POST"
-      enctype="multipart/form-data"
-      class="p-5 mt-5 w-50 justify-content-center mx-auto text-light bg_color"
-    >
-      <% if(msg != '') {%>
-      <p style="text-align: center"><%=msg%></p>
-      <%}%>
+  <form action="/register" method="POST" enctype="multipart/form-data"
+    class="p-5 mt-5 w-50 justify-content-center mx-auto text-light bg_color">
+    <% if(msg != '') {%>
+    <p style="text-align: center"><%=msg%></p>
+    <%}%>
       <div class="text-center mt-3">
         <h2 class="display-4">Admin Register</h2>
       </div>
@@ -93,5 +89,6 @@
     <br />
 
     <%- include('./partials/footer.ejs') %>
-  </body>
+</body>
+
 </html>

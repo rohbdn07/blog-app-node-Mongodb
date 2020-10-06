@@ -4,42 +4,57 @@ const path = require("path");
 const User = require("../models/user");
 const checkDuplicateEmailorUsername = require("../AuthMiddleware/Auth");
 const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
+const config = require('../config/auth.config');
+if (typeof localStorage === "undefined" || localStorage === null) {
+    var LocalStorage = require("node-localstorage").LocalStorage;
+    localStorage = new LocalStorage("./scratch");
+}
 
 //this is Login route page...
 router.get("/login", (req, res, next) => {
     res.render("login", {
         title: "loginPage",
-        msg: '',
+        msg: "",
     });
 });
 
-router.post('/login', (req, res, next) => {
+router.post("/login", (req, res, next) => {
     const username = req.body.username;
     const email = req.body.email;
     const password = req.body.password;
 
     const checkUser = User.findOne({
-        email: email
+        email: email,
     });
     checkUser.exec((err, data) => {
-
         if (err) throw err;
-
+        const getUserID = data._id;
         const hashedPassword = data.password;
         if (bcrypt.compareSync(password, hashedPassword)) {
-            res.render("login", {
-                title: "login authication",
-                msg: "Yay! user logging sucessfully!!!",
-            });
+            let token = jwt.sign({
+                    userID: getUserID
+                },
+                config.secretKey, {
+                    expiresIn: '5m'
+                }
+            );
+            localStorage.setItem('userToken', token);
+            localStorage.setItem('loginUser', username);
+
+            res.redirect('/blogs')
+            // res.render("login", {
+            //     title: "login authication",
+            //     msg: "Yay! user logging sucessfully!!!",
+            // });
         } else {
             res.render("login", {
                 title: "login authication failed",
                 msg: "oops! Username or password not matched",
             });
         }
-    })
-
-})
+    });
+});
 
 //this is Register route page...
 router.get("/register", (req, res, next) => {
