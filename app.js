@@ -7,17 +7,18 @@ const router = express.Router();
 const mangoose = require("mongoose");
 const bodyParser = require("body-parser");
 const _ = require("lodash");
-const Uri = require("./config/uri");
 const fileUpload = require("express-fileupload");
+require('dotenv').config();
 
 //express app
 const app = express();
 
 //listing to LocalHost
-app.listen(5000);
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => console.log(`listening on ${PORT}`));
 
 //connect to Mangodb...
-const dbURI = Uri;
+const dbURI = process.env.mongodb_URI;
 mangoose
   .connect(dbURI, {
     useNewUrlParser: true,

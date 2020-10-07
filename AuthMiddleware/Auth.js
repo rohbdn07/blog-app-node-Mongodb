@@ -2,6 +2,22 @@ const express = require("express");
 const router = express.Router();
 const path = require("path");
 const User = require("../models/user");
+const jwt = require("jsonwebtoken");
+require('dotenv').config();
+if (typeof localStorage === "undefined" || localStorage === null) {
+  var LocalStorage = require("node-localstorage").LocalStorage;
+  localStorage = new LocalStorage("./scratch");
+}
+
+const checkLoginUser = (req, res, next) => {
+  try {
+    let decoded = jwt.verify(userToken, process.env.SECRETKEY);
+  } catch (err) {
+    res.redirect('/login');
+
+  }
+  next();
+}
 
 checkDuplicateEmailorUsername = (req, res, next) => {
   let email = req.body.email;
@@ -25,7 +41,7 @@ checkDuplicateEmailorUsername = (req, res, next) => {
     email: email,
   });
   existEmail.exec((err, user) => {
-    if (err) throw err;
+    if (err) return console.log(err);
 
     if (user) {
       console.log(user);
@@ -39,3 +55,8 @@ checkDuplicateEmailorUsername = (req, res, next) => {
 };
 
 module.exports = checkDuplicateEmailorUsername;
+module.exports = checkLoginUser;
+// module.exports = {
+//   checkLoginUser,
+//   checkDuplicateEmailorUsername,
+// };

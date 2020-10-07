@@ -5,11 +5,13 @@ const User = require("../models/user");
 const checkDuplicateEmailorUsername = require("../AuthMiddleware/Auth");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const config = require('../config/auth.config');
+const checkLoginUser = require('../AuthMiddleware/Auth');
+require('dotenv').config();
 if (typeof localStorage === "undefined" || localStorage === null) {
     var LocalStorage = require("node-localstorage").LocalStorage;
     localStorage = new LocalStorage("./scratch");
 }
+
 
 //this is Login route page...
 router.get("/login", (req, res, next) => {
@@ -21,7 +23,7 @@ router.get("/login", (req, res, next) => {
 
 router.post("/login", (req, res, next) => {
     const username = req.body.username;
-    const email = req.body.email;
+    var email = req.body.email;
     const password = req.body.password;
 
     const checkUser = User.findOne({
@@ -35,12 +37,10 @@ router.post("/login", (req, res, next) => {
             let token = jwt.sign({
                     userID: getUserID
                 },
-                config.secretKey, {
-                    expiresIn: '5m'
-                }
+                process.env.SECRETKEY,
             );
             localStorage.setItem('userToken', token);
-            localStorage.setItem('loginUser', username);
+            localStorage.setItem('loginUser', email);
 
             res.redirect('/blogs')
             // res.render("login", {
@@ -57,7 +57,7 @@ router.post("/login", (req, res, next) => {
 });
 
 //this is Register route page...
-router.get("/register", (req, res, next) => {
+router.get("/register", checkLoginUser, (req, res, next) => {
     res.render("register", {
         title: "registerPage",
         msg: "",
@@ -92,6 +92,12 @@ router.post("/register", checkDuplicateEmailorUsername, (req, res, next) => {
             });
         });
     }
+});
+
+router.get('/logout', checkLoginUser, (req, res, next) => {
+    localStorage.removeItem('userToken');
+    localStorage.removeItem('loginUser');
+    res.redirect('/login');
 });
 
 //router is exported to App.js.

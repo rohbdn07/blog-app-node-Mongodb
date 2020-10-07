@@ -5,11 +5,13 @@
 <body class="details_bg">
   <%-include('./partials/nav.ejs') %>
   <br />
-
+  <% if(loginUser){%>
   <div class="deleteIcon">
     <a class="btn btn-outline-danger w-25 d-flex justify-content-sm-end" data-doc="<%=blog._id%>"
       role="button">Delete</a>
   </div>
+  <%}%>
+  
   <br />
   <!-- //Carousel images -->
   <%-include('./partials/carousel.ejs') %>

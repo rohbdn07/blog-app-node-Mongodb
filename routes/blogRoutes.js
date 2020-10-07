@@ -2,23 +2,35 @@ const express = require("express");
 const router = express.Router();
 const path = require("path");
 const Blog = require("../models/blog");
+const jwt = require("jsonwebtoken");
+const checkLoginUser = require('../AuthMiddleware/Auth');
+const User = require("../models/user");
+require('dotenv').config();
+
+if (typeof localStorage === "undefined" || localStorage === null) {
+  var LocalStorage = require("node-localstorage").LocalStorage;
+  localStorage = new LocalStorage("./scratch");
+}
 
 //Routes....
 
 //displaying all blogs on index page(home page) using GET method,
 //which are stored in mongodb..
 router.get("/blogs", (req, res) => {
-  let loginUser = localStorage.getItem('loginUser');
+  const loginUser = localStorage.getItem('loginUser');
+  console.log(loginUser)
   Blog.find()
     .sort({
-      createdAt: -1, //blog will display in decending order.
+      createdAt: 'desc', //blog will display in decending order.
     })
     .then((data) => {
       res.render("index", {
         title: "All blogs",
         blogs: data,
         loginUser: loginUser,
+
       });
+      console.log('logged as:' + loginUser);
 
     })
     .catch((err) => {
@@ -38,6 +50,7 @@ router.post("/blogs", (req, res) => {
     if (err) {
       console.log("there is an error" + err);
     } else {
+
       Blog.create({
           ...req.body,
           image: `/posts/${filename}`,
@@ -65,15 +78,17 @@ router.get("/about", (req, res) => {
 
 //this is Create route...
 router.get("/blogs/create", (req, res) => {
+  const loginUser = localStorage.getItem('loginUser');
   res.render("create", {
     title: "Create",
+    loginUser: loginUser,
   });
 });
 
 
 
 //this is Create post route, It'll 1st stored the data to mongodb using POST method.
-router.post("/blogs", (req, res) => {
+router.post("/blogs", checkLoginUser, (req, res) => {
   // console.log(req.body)
   const blog = new Blog(req.body);
   blog
@@ -90,12 +105,13 @@ router.post("/blogs", (req, res) => {
 // this is single blog page route pass through '/blogs/:id'...
 router.get("/blogs/:id", async (req, res) => {
   const id = req.params.id;
-
+  const loginUser = localStorage.getItem('loginUser');
   const blog = await Blog.findById(id);
   try {
     res.render("details", {
       title: "Blog details",
       blog: blog,
+      loginUser: loginUser,
     });
   } catch {
     (err) => console.log(err);
