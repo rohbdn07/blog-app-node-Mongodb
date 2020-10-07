@@ -12,12 +12,10 @@ if (typeof localStorage === "undefined" || localStorage === null) {
     localStorage = new LocalStorage("./scratch");
 }
 
-
 router.post("/login", (req, res, next) => {
     const username = req.body.username;
     var email = req.body.email;
     const password = req.body.password;
-
     const checkUser = User.findOne({
         email: email,
     });
@@ -31,19 +29,14 @@ router.post("/login", (req, res, next) => {
                 },
                 process.env.SECRETKEY,
             );
-            localStorage.setItem('userToken', token);
-            localStorage.setItem('loginUser', email);
-
+            localStorage.setItem('userToken', token); //store JWT token as userToken in localstore(scratch folder)
+            localStorage.setItem('loginUser', email); //store login email as loginUser in localstore(scratch folder)
             res.redirect('/blogs')
-            // res.render("login", {
-            //     title: "login authication",
-            //     msg: "Yay! user logging sucessfully!!!",
-            // });
+
         } else {
             res.render("login", {
                 title: "login authication failed",
                 msg: "oops! Username or password not matched",
-
             });
         }
     });

@@ -18,10 +18,9 @@ if (typeof localStorage === "undefined" || localStorage === null) {
 //which are stored in mongodb..
 router.get("/blogs", (req, res) => {
   const loginUser = localStorage.getItem('loginUser');
-  console.log(loginUser)
   Blog.find()
     .sort({
-      createdAt: 'desc', //blog will display in decending order.
+      createdAt: '-1', //blog will display in decending order.
     })
     .then((data) => {
       res.render("index", {
@@ -39,30 +38,31 @@ router.get("/blogs", (req, res) => {
     });
 });
 
-//Upload the image/file path....
-router.post("/blogs", (req, res) => {
-  const file = req.files.file;
-  const filename = file.name;
+// another way of Uploading the image/file...
 
-  console.log(filename);
+// router.post("/blogs", (req, res) => {
+//   const file = req.files.file;
+//   const filename = file.name;
 
-  file.mv(`public/posts/${filename}`, (err) => {
-    if (err) {
-      console.log("there is an error" + err);
-    } else {
+//   console.log(filename);
 
-      Blog.create({
-          ...req.body,
-          image: `/posts/${filename}`,
-        },
-        (error, post) => {
-          console.log(post);
-          res.redirect("/");
-        }
-      );
-    }
-  });
-});
+//   file.mv(`public/posts/${filename}`, (err) => {
+//     if (err) {
+//       console.log("File uploading err:" + err);
+//     } else {
+
+//       Blog.create({
+//           ...req.body,
+//           image: `/posts/${filename}`,
+//         },
+//         (error, post) => {
+//           console.log(post);
+//           res.redirect("/");
+//         }
+//       );
+//     }
+//   });
+// });
 
 //this is route to home(index page)
 router.get("/", (req, res) => {
@@ -94,16 +94,33 @@ router.get("/blogs/create", (req, res) => {
 //this is Create post route, It'll 1st stored the data to mongodb using POST method.
 router.post("/blogs", checkLoginUser, (req, res) => {
   // console.log(req.body)
-  const blog = new Blog(req.body);
-  blog
-    .save()
-    .then(() => {
-      console.log(" Your post is stored in db");
-      res.redirect("/blogs");
+  const file = req.files.file;
+  const filename = file.name;
+
+  console.log(filename);
+
+  file.mv(`public/posts/${filename}`, (err) => {
+    if (err) {
+      console.log("File uploading err:" + err)
+    };
+    // const blog = new Blog(req.body);
+    const blog = new Blog({
+      username: req.body.username,
+      title: req.body.title,
+      description: req.body.description,
+      body: req.body.body,
+      image: `/posts/${filename}`,
     })
-    .catch((err) => {
-      console.log(err);
-    });
+    blog
+      .save()
+      .then(() => {
+        console.log(" Your post is stored in db");
+        res.redirect("/blogs");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  });
 });
 
 // this is single blog page route pass through '/blogs/:id'...

@@ -28,7 +28,7 @@
   
         <% if(!loginUser){%>
         <li class="nav-item active">
-          <a class="nav-link" href="/login"><strong>Login</strong> <span class="sr-only">(current)</span></a>
+          <a class="nav-link" href="/login"><strong>AdminLogin</strong> <span class="sr-only">(current)</span></a>
         </li>
         <%}%>
         <!-- <li class="nav-item active">
@@ -52,7 +52,7 @@
 
   <% if(loginUser){%>
         <form action="/blogs" method="POST" enctype="multipart/form-data"
-          class="p-5 mt-5 w-50 justify-content-center mx-auto text-light bg_color">
+          class="p-5 m-5 w-50 justify-content-center mx-auto text-light bg_color">
           <div class="text-center mt-3">
             <h2 class="display-4">Create Blog</h2>
           </div>
