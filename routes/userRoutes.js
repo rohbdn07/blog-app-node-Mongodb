@@ -13,14 +13,6 @@ if (typeof localStorage === "undefined" || localStorage === null) {
 }
 
 
-//this is Login route page...
-router.get("/login", (req, res, next) => {
-    res.render("login", {
-        title: "loginPage",
-        msg: "",
-    });
-});
-
 router.post("/login", (req, res, next) => {
     const username = req.body.username;
     var email = req.body.email;
@@ -51,9 +43,21 @@ router.post("/login", (req, res, next) => {
             res.render("login", {
                 title: "login authication failed",
                 msg: "oops! Username or password not matched",
+
             });
         }
     });
+});
+
+//this is Login route page...
+router.get("/login", (req, res, next) => {
+    const loginUser = localStorage.getItem('loginUser');
+    res.render("login", {
+        title: "loginPage",
+        msg: "",
+        loginUser: loginUser,
+    });
+
 });
 
 //this is Register route page...

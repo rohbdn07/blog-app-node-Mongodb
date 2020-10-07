@@ -69,10 +69,14 @@ router.get("/", (req, res) => {
   res.redirect("/blogs");
 });
 
+
+
 //This is About route...
 router.get("/about", (req, res) => {
+  const loginUser = localStorage.getItem('loginUser');
   res.render("about", {
     title: "About",
+    loginUser: loginUser,
   });
 });
 
@@ -134,12 +138,14 @@ router.delete("/blogs/:id", (req, res) => {
 
 router.get("/edit/:id", (req, res) => {
   const id = req.params.id;
-
+  const loginUser = localStorage.getItem('loginUser');
   Blog.findByIdAndUpdate(id)
     .then((data) => {
       res.render("edit", {
         title: "edit blog",
         blog: data,
+        loginUser: loginUser,
+
       });
     })
     .catch((err) => console.log(err));
