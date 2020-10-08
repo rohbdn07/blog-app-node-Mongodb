@@ -144,10 +144,13 @@ router.post("/blogs", (req, res) => {
 });
 
 // this is single blog page route pass through '/blogs/:id'...
-router.get("/blogs/:id", async (req, res) => {
-  const id = req.params.id;
+router.get("/blogs/:slug", async (req, res) => {
+  // const id = req.params.id;
   const loginUser = localStorage.getItem('loginUser');
-  const blog = await Blog.findById(id);
+  const blog = await Blog.findOne({
+    slug: req.params.slug
+  });
+
   try {
     res.render("details", {
       title: "Blog details",
@@ -162,9 +165,11 @@ router.get("/blogs/:id", async (req, res) => {
 //this is Delete route
 //it 1st delete the blog of that ID in mongodb . then,
 //send the response in JSON format and redirect it to '/blogs' route.
-router.delete("/blogs/:id", (req, res) => {
-  const id = req.params.id;
-  Blog.findByIdAndDelete(id)
+router.delete("/blogs/:slug", (req, res) => {
+  // const id = req.params.id;
+  Blog.findOne({
+      slug: req.params.slug
+    })
     .then(() => {
       res.json({
         redirect: "/blogs",
@@ -173,11 +178,13 @@ router.delete("/blogs/:id", (req, res) => {
     .catch((err) => console.log(err));
 });
 
-router.get("/edit/:id", (req, res) => {
-  const id = req.params.id;
+router.get("/edit/:slug", (req, res) => {
+  // const id = req.params.id;
   const loginUser = localStorage.getItem('loginUser');
-  Blog.findByIdAndUpdate(id)
-    .then((data) => {
+  // Blog.findByIdAndUpdate(id)
+  Blog.findOne({
+      slug: req.params.slug
+    }).then((data) => {
       res.render("edit", {
         title: "edit blog",
         blog: data,

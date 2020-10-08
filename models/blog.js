@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const slugify = require('slugify');
 
 //Schema represent the database's structure and it's contents.
 const Schema = mongoose.Schema;
@@ -27,9 +28,24 @@ const blogSchema = new Schema({
     type: Date,
     default: new Date().toLocaleDateString(),
   },
+  slug: {
+    type: String,
+    required: true,
+
+  }
 }, {
   timestamps: true,
 });
+
+blogSchema.pre('validate', function (next) {
+  if (this.title) {
+    this.slug = slugify(this.title, {
+      lower: true,
+      strict: true
+    })
+    next()
+  }
+})
 
 //inside mongoose.model('blog')=>'blog'represent the singular form of database.
 //name(mongodb will search pular name of 'blog' in db)

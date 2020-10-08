@@ -23,7 +23,7 @@ mangoose
   .connect(dbURI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
-    useCreateIndexes: true,
+    useCreateIndex: true,
   })
   .then(() => console.log("connected to db"))
   .catch((err) => console.log("there is an error", err));

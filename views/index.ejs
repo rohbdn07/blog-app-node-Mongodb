@@ -74,10 +74,10 @@
           <p class="lead">Posted By :<%= blog.username %></p>
           <p class="lead">Published at :<%= blog.createdAt %></p>
           <% if(loginUser) {%>
-          <a class="btn btn-danger btn-md" href="/edit/<%=blog._id %>">Update</a>
+          <a class="btn btn-danger btn-md" href="/edit/<%=blog.slug %>">Update</a>
           <br>
           <%}%>
-        <a class="btn btn-dark btn-md" href="/blogs/<%=blog._id %>">Read more</a>
+        <a class="btn btn-dark btn-md" href="/blogs/<%=blog.slug %>">Read more</a>
           <hr class="my-4" />
         </div>
         <% }) %> <% } else { %>
