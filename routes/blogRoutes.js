@@ -87,6 +87,7 @@ router.get("/blogs/create", (req, res) => {
   res.render("create", {
     title: "Create",
     msg: '',
+    blogs: new Blog,
     loginUser: loginUser,
   });
 });
@@ -94,7 +95,7 @@ router.get("/blogs/create", (req, res) => {
 
 
 //this is Create post route, It'll 1st stored the data to mongodb using POST method.
-router.post("/blogs", checkLoginUser, (req, res) => {
+router.post("/blogs", (req, res) => {
   // console.log(req.body)
   const loginUser = localStorage.getItem('loginUser');
   const file = req.files.file;
@@ -107,7 +108,7 @@ router.post("/blogs", checkLoginUser, (req, res) => {
       console.log("File uploading err:" + err)
     };
     // const blog = new Blog(req.body);
-    const blog = new Blog({
+    let blog = new Blog({
       username: req.body.username,
       title: req.body.title,
       description: req.body.description,
@@ -115,14 +116,16 @@ router.post("/blogs", checkLoginUser, (req, res) => {
       image: `/posts/${filename}`,
     })
     try {
-      const blogSaved = await blog.save();
+      blog = await blog.save();
       res.redirect('/blogs')
       console.log('file saved to db');
     } catch (err) {
       res.render('create', {
         title: 'not saved',
         msg: 'opps! file not saved',
-        loginUser: loginUser
+        blogs: blog,
+        loginUser: loginUser,
+
       });
       console.log('data not saved' + '' + err)
     }
