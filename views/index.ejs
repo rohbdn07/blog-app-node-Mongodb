@@ -45,8 +45,8 @@
   
       </ul>
   
-      <form class="form-inline my-2 my-lg-0">
-        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" />
+      <form action="/search/" class="form-inline my-2 my-lg-0" method="POST">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="search"/>
         <button class="btn btn-outline-success my-2 my-sm-0 mr-5" type="submit">
           Search
         </button>
@@ -81,17 +81,17 @@
           <hr class="my-4" />
         </div>
         <% }) %> <% } else { %>
-        <p class="text-dark">
+        <p class="text-light">
           There are no blogs to display... <br />
           Create a new post.
         </p>
         <% } %>
     </div>
     <!-- //User Profile..... -->
-    <div class="jumbotron mr-5 mt-5 w-25 h-25">
-      <h2 class="text-dark">User Profile</h2>
+    <div class="jumbotron mr-5 bg-info mt-4 w-25 h-25">
+      <h2 class="text-light">User Profile</h2>
       <br />
-      <div class="shadow p-3 mb-5 border border-info rounded text-dark">
+      <div class="shadow p-5 m-2 nav-color border border-info rounded text-light">
         <h1 class="display-4"> Rohit Bhandari<%=blogs.username %></h1>
         <a class="btn btn-dark btn-md" href="#">FACEBOOK</a>
         <a class="btn btn-danger btn-md" href="#">GITHUB</a>

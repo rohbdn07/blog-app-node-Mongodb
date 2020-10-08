@@ -167,5 +167,31 @@ router.get("/edit/:id", (req, res) => {
     })
     .catch((err) => console.log(err));
 });
+
+//SEARCH ROUTE....
+router.post('/search/', (req, res) => {
+  const loginUser = localStorage.getItem('loginUser');
+  let titleSearch = req.body.search;
+  if (titleSearch != '') {
+    var filterParameter = {
+      $and: [{
+        title: titleSearch
+      }]
+    }
+  } else {
+    var filterParameter = {};
+  }
+  const titleFilter = Blog.find(filterParameter);
+  titleFilter.exec((err, data) => {
+    res.render("index", {
+      title: "All blogs",
+      blogs: data,
+      loginUser: loginUser,
+
+    });
+  })
+
+
+})
 //router is exported to App.js.
 module.exports = router;
