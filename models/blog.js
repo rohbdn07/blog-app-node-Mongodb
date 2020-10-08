@@ -22,9 +22,10 @@ const blogSchema = new Schema({
     required: true,
   },
   image: String,
+
   createdAt: {
     type: Date,
-    default: new Date().toString(),
+    default: new Date().toLocaleDateString(),
   },
 }, {
   timestamps: true,

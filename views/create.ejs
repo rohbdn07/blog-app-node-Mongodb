@@ -41,18 +41,18 @@
         </li>
         <%}%>
    </ul>
-      <form class="form-inline my-2 my-lg-0">
-        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" />
-        <button class="btn btn-outline-success my-2 my-sm-0 mr-5" type="submit">
-          Search
-        </button>
-      </form>
+      
     </div>
   </nav>
 
   <% if(loginUser){%>
         <form action="/blogs" method="POST" enctype="multipart/form-data"
           class="p-5 m-5 w-50 justify-content-center mx-auto text-light bg_color">
+          <% if(msg!=''){%>
+          <div class="alert bg-danger text-light">
+            <p><%=msg%></p>
+          </div>
+          <%}%>
           <div class="text-center mt-3">
             <h2 class="display-4">Create Blog</h2>
           </div>
@@ -89,7 +89,7 @@
 
 
 
-        <%- include('./partials/footer.ejs') %>
+          <%- include('./partials/footer.ejs') %>
 </body>
 
 <%- include('./partials/scriptTag.ejs') %>

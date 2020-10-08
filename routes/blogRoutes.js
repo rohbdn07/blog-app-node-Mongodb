@@ -28,6 +28,7 @@ router.get("/blogs", (req, res) => {
         blogs: data,
         loginUser: loginUser,
 
+
       });
       console.log('logged as:' + loginUser);
 
@@ -85,6 +86,7 @@ router.get("/blogs/create", (req, res) => {
   const loginUser = localStorage.getItem('loginUser');
   res.render("create", {
     title: "Create",
+    msg: '',
     loginUser: loginUser,
   });
 });
@@ -94,12 +96,13 @@ router.get("/blogs/create", (req, res) => {
 //this is Create post route, It'll 1st stored the data to mongodb using POST method.
 router.post("/blogs", checkLoginUser, (req, res) => {
   // console.log(req.body)
+  const loginUser = localStorage.getItem('loginUser');
   const file = req.files.file;
   const filename = file.name;
 
   console.log(filename);
 
-  file.mv(`public/posts/${filename}`, (err) => {
+  file.mv(`public/posts/${filename}`, async (err) => {
     if (err) {
       console.log("File uploading err:" + err)
     };
@@ -111,15 +114,29 @@ router.post("/blogs", checkLoginUser, (req, res) => {
       body: req.body.body,
       image: `/posts/${filename}`,
     })
-    blog
-      .save()
-      .then(() => {
-        console.log(" Your post is stored in db");
-        res.redirect("/blogs");
-      })
-      .catch((err) => {
-        console.log(err);
+    try {
+      const blogSaved = await blog.save();
+      res.redirect('/blogs')
+      console.log('file saved to db');
+    } catch (err) {
+      res.render('create', {
+        title: 'not saved',
+        msg: 'opps! file not saved',
+        loginUser: loginUser
       });
+      console.log('data not saved' + '' + err)
+    }
+
+
+    // .then(() => {
+    //   console.log(" Your post is stored in db");
+    //   res.redirect("/blogs", {
+    //     createdAt: createdAt,
+    //   });
+    // })
+    // .catch((err) => {
+    //   console.log(err);
+    // });
   });
 });
 
@@ -175,7 +192,7 @@ router.post('/search/', (req, res) => {
   if (titleSearch != '') {
     var filterParameter = {
       $and: [{
-        title: titleSearch
+        title: titleSearch.toLowerCase()
       }]
     }
   } else {
