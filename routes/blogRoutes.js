@@ -167,7 +167,10 @@ router.get("/blogs/:slug", async (req, res) => {
 //send the response in JSON format and redirect it to '/blogs' route.
 router.delete("/blogs/:slug", (req, res) => {
   // const id = req.params.id;
-  Blog.findOne({
+  // Blog.findOne({
+  //     slug: req.params.slug
+  //   })
+  Blog.findOneAndDelete({
       slug: req.params.slug
     })
     .then(() => {

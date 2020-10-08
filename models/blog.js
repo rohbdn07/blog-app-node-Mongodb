@@ -26,7 +26,7 @@ const blogSchema = new Schema({
 
   createdAt: {
     type: Date,
-    default: new Date().toLocaleDateString(),
+    default: new Date(),
   },
   slug: {
     type: String,
@@ -37,6 +37,7 @@ const blogSchema = new Schema({
   timestamps: true,
 });
 
+//this will validate blogSchema before stores its data to database.
 blogSchema.pre('validate', function (next) {
   if (this.title) {
     this.slug = slugify(this.title, {

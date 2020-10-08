@@ -13,8 +13,7 @@ if (typeof localStorage === "undefined" || localStorage === null) {
 }
 
 router.post("/login", (req, res, next) => {
-    const username = req.body.username;
-    var email = req.body.email;
+    const email = req.body.email;
     const password = req.body.password;
     const checkUser = User.findOne({
         email: email,
