@@ -18,7 +18,7 @@ if (typeof localStorage === "undefined" || localStorage === null) {
 //which are stored in mongodb..
 router.get("/blogs", (req, res) => {
   const loginUser = localStorage.getItem('loginUser');
-  Blog.find()
+  Blog.find({})
     .sort({
       createdAt: '-1', //blog will display in decending order.
     })
@@ -112,7 +112,7 @@ router.post("/blogs", (req, res) => {
       username: req.body.username,
       title: req.body.title,
       description: req.body.description,
-      body: req.body.body,
+      content: req.body.content,
       image: `/posts/${filename}`,
     })
     try {
@@ -122,7 +122,7 @@ router.post("/blogs", (req, res) => {
     } catch (err) {
       res.render('create', {
         title: 'not saved',
-        msg: 'opps! file not saved',
+        msg: 'opps! file not saved, Title name already exit!',
         blogs: blog,
         loginUser: loginUser,
 
@@ -189,7 +189,7 @@ router.get("/edit/:slug", (req, res) => {
       slug: req.params.slug
     }).then((data) => {
       res.render("edit", {
-        title: "edit blog",
+        title: "Update blog",
         blog: data,
         loginUser: loginUser,
 

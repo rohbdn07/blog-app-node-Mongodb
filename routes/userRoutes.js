@@ -90,7 +90,7 @@ router.post("/register", checkDuplicateEmailorUsername, (req, res, next) => {
     }
 });
 
-router.get('/logout', checkLoginUser, (req, res, next) => {
+router.get('/logout', (req, res, next) => {
     localStorage.removeItem('userToken');
     localStorage.removeItem('loginUser');
     res.redirect('/login');
