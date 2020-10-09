@@ -93,8 +93,19 @@
 
 
     <%- include('./partials/footer.ejs') %>
-</body>
+    <script src="./node_modules/@ckeditor/ckeditor5-build-classic/build/ckeditor.js"></script>
+    <script>
+        ClassicEditor
+            .create( document.querySelector( '#content' ) )
+            .then( editor => {
+                window.editor = editor;
+            } )
+            .catch( error => {
+                console.error( 'There was a problem initializing the editor.', error );
+            } );
+    </script> 
+<%- include('./partials/scriptTag.ejs') %>  
 
-<%- include('./partials/scriptTag.ejs') %>
+</body>
 
 </html>
