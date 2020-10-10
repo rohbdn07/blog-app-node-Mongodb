@@ -65,9 +65,12 @@
 
       <h2 class="text-light">All Blogs</h2>
       <br />
+        
       <% if (blogs.length > 0) { %> <% blogs.forEach(blog => { %>
-        <div class="card shadow border border-info rounded text-dark mb-5 p-3" style='width:50rem; height:40rem;'>
+  
+        <div class=" card shadow border border-info rounded text-dark mb-5 p-3  " style='width:50rem; height:40rem;'>
           <div class="index__image" style="background-image: url('<%=blog.image %>')"></div>
+          
           <h1 class="display-4"><%= blog.title %></h1>
           <p class="lead"><%= blog.description %></p>
           <p>Posted by :<%= blog.username %></p>
@@ -86,19 +89,20 @@
         </p>
         <% } %>
     </div>
+  
     <!-- //User Profile..... -->
-    <div class="jumbotron mr-5 bg-info mt-4 w-25 h-25">
+    <div class="jumbotron container-fluid mr-5 bg-info mt-4 w-25 h-25 media-body">
       <h2 class="text-light">User Profile</h2>
       <br />
       <div class="shadow p-5 m-2 nav-color border border-info rounded text-light">
-        <h1 class="display-4"> Rohit Bhandari<%=blogs.username %></h1>
+        <h1 class="display-4"> Rohit Bhandari</h1>
         <a class="btn btn-dark btn-md" href="#">FACEBOOK</a>
         <a class="btn btn-danger btn-md" href="#">GITHUB</a>
         <hr class="my-4" />
       </div>
     </div>
     </div>
-    <%- include('./partials/footer.ejs') %>
+  <%- include('./partials/footer.ejs') %>
 </body>
 
 

@@ -46,32 +46,42 @@
   
     </div>
   </nav>
-  
-  <div class="blogs content mt-5 w-80 m-5 text-light pb-5">
-
-    <h2 class="text-center">Rohit Bhandari</h2>
-    <% if(loginUser){%>
-        <strong class="my-5 ">Welcome: <%=loginUser%></strong>
-        <%}%>
-    <br />
-    <br />
-    <h4>
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus sit
-      nam maxime, natus rem libero consequuntur tempore commodi dolorum
-      explicabo ipsum reprehenderit quis dolorem iusto quod ea, fuga,
-      <br />
-      <br />
-      officiis illum. Lorem, ipsum dolor sit amet consectetur adipisicing
-      elit. Amet dicta in aliquam, ipsum nesciunt tempore porro, similique
-      odit nostrum repudiandae maxime ipsam et, aut provident officia sit
-      libero temporibus facere.
-      <br />
-      <br>
-      officiis illum. Lorem, ipsum dolor sit amet consectetur adipisicing
-      elit. Amet dicta in aliquam, ipsum nesciunt tempore porro, similique
-      odit nostrum repudiandae maxime ipsam et, aut provident officia sit
-      libero temporibus facere.
-    </h4>
+  <div class="m-5">
+  <% if(loginUser){%>
+    <strong class=" ">Welcome: <%=loginUser%></strong>
+    <%}%>
+  </div>
+  <div class="row container m-5 p-5 bg-info " >
+   
+    <div class="col-3 ">
+      <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+        <a class="nav-link active text-light" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">Name</a>
+        <a class="nav-link text-light" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">Profile</a>
+        <a class="nav-link text-light" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">Education</a>
+        <a class="nav-link text-light" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false">project</a>
+      </div>
+    </div>
+    <div class="col-9 " >
+      <div class="tab-content" id="v-pills-tabContent">
+        <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
+          <h1>ROHIT BHANDARI</h1></div>
+        <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
+          <h4> Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus sit
+            nam maxime, natus rem libero consequuntur tempore commodi dolorum
+            explicabo ipsum reprehenderit quis dolorem iusto quod ea, fuga,</h4>
+        </div>
+        <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">
+          <h4> Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus sit
+            nam maxime, natus rem libero consequuntur tempore commodi dolorum
+            explicabo ipsum reprehenderit quis dolorem iusto quod ea, fuga,</h4>
+        </div>
+        <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">
+          <h4> Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus sit
+            nam maxime, natus rem libero consequuntur tempore commodi dolorum
+            explicabo ipsum reprehenderit quis dolorem iusto quod ea, fuga,</h4>
+        </div>
+      </div>
+    </div>
   </div>
   <%- include('./partials/footer.ejs') %>
         <%-
