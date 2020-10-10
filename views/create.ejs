@@ -58,22 +58,22 @@
           </div>
 
           <div class="form-group">
-            <label for="username"><strong>Blog's Username</strong> </label>
+            <label for="username">Blog's Username </label>
             <input type="text" class="form-control" id="username" name="username" value="<%=blogs.username%>" required
           />
     </div>
     <div class="form-group">
-      <label for="title"><strong>Blog's title</strong> </label>
+      <label for="title"> Blog's title </label>
       <input type="text" class="form-control" id="title" name="title" value="<%=blogs.title%>" required />
       <small id="emailHelp" class="form-text text-muted">Write what you like to...</small>
     </div>
     <div class="form-group">
-      <label for="description"><strong>Blog's description</strong></label>
+      <label for="description">Blog's description</label>
       <input type="text" class="form-control" id="description" name="description" value="<%=blogs.description%>"
         required />
     </div>
     <div class="form-group">
-      <label for="content"><strong>Blog's Content</strong></label>
+      <label for="content"> Blog's Content</label>
       <textarea class="form-control" type="text" id="content" name="content" rows="3" value="<%=blogs.content%>"
         required>
       </textarea>
@@ -84,8 +84,8 @@
       <label class="form-check-label" for="exampleCheck1">Set Private post</label>
     </div> -->
     <div class="form-group">
-      <label for="title"><strong>Blog's picture</strong> </label>
-      <input type="file" class="form-control-file" id="file" name="file" requirednode />
+      <label for="title"> Blog's picture </label>
+      <input type="file" class="form-control-file" id="file" name="file" required/>
     </div>
     <button type="submit" class="btn btn-danger">Submit</button>
     </form>
@@ -93,9 +93,10 @@
 
 <script src="/ckeditor/ckeditor/ckeditor.js"></script>
 <script>
-  CKEDITOR.replace('content',{
-    plugins:'wysiwygarea,toolbar,basicstyles,link'
-  });
+ CKEDITOR.replace('content');
+//  CKEDITOR.replace('content',{
+//     plugins:'wysiwygarea,toolbar,basicstyles,link'
+//   });
 </script>
 <%- include('./partials/scriptTag.ejs') %>  
 <%- include('./partials/footer.ejs') %>

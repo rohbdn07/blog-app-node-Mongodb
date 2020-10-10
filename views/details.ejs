@@ -56,40 +56,79 @@
   <br />
   <!-- //Carousel images -->
   <%-include('./partials/carousel.ejs') %>
-        <br />
         <hr />
-        <div class="d-flex">
-        <div class="blogs content mt-5 text-center text-dark container-md">
-          <h1 class="display-3 text-primary my-5"><%=blog.title%></h1>
-          <div class="details__carousel upload-image rounded" style="background-image: url('<%=blog.image %>')"></div>
-          <br />
-          <h5><%= blog.description%></h5>
-          <h6 class="grey-text">Published at :<%= blog.createdAt%></h6>
-          <br />
-          <div class="my-5">
-            <h3><%= blog.content%></h3>
+        <div class="d-flex align-items-start">
+          <form action="/blogs" method="POST" enctype="multipart/form-data"
+          class="p-4 w-25 h-25 justify-content-center text-light bg_color">
+          
+          <div class="text-center mt-3">
+            <h2 class="display-4">News report</h2>
           </div>
+  
+          <div class="form-group">
+            <label for="username"><strong> Email</strong> </label>
+            <input type="text" class="form-control" id="username" name="username" value="#" required
+          />
+          </div>
+    <div  class="form-group">
+      <label for="content"><strong>Comment</strong></label>
+      <textarea class="form-control" type="text" id="content" name="content" rows="3" value="#"
+        required>
+      </textarea>
+    </div>
+    </form>
+        <div class="blogs content mt-5 text-dark container bg-muted">
+          <div class="text-center">
+          <h1 class="display-3 text-primary my-5"><%=blog.title.toUpperCase()%></h1>
         </div>
-      <form action="/blogs" method="POST" enctype="multipart/form-data"
-        class="p-5 m-5 w-50 justify-content-center mx-auto text-light bg_color">
+          <div class="details__carousel upload-image rounded mb-5" style="background-image: url('<%=blog.image %>')">
+            </div>
+        <div class="text-center">
+          <h6 class="grey-text">Published at :<%= blog.createdAt%></h6>
+        </div>
+        <div class="text-center text-dark">
+          <h4 class="text-info"><%= blog.description%></h4>
+        </div>
+        <div class="my-5 text-dark">
+            <h3 class="text-danger"><%- blog.content%></h3>
+        </div>
+        </div>
+        <form action="/blogs" method="POST" enctype="multipart/form-data"
+        class="p-4 w-25 h-25 justify-content-center text-light bg_color rounded">
         
         <div class="text-center mt-3">
-          <h2 class="display-4">Comment on Blog</h2>
+          <h2 class="display-4">Subscription</h2>
         </div>
 
         <div class="form-group">
-          <label for="username"><strong> name</strong> </label>
-          <input type="text" class="form-control" id="username" name="username" value="#" required
+          <label for="username"><strong> Email</strong> </label>
+          <input type="text" class="form-control w-auto" id="username" name="username" value="#" required
         />
         </div>
-  <div  class="form-group">
-    <label for="content"><strong>Comment</strong></label>
-    <textarea class="form-control" type="text" id="content" name="content" rows="3" value="#"
-      required>
-    </textarea>
-  </div>
+   
   </form>
 </div>
+<hr>
+<form action="/blogs" method="POST" enctype="multipart/form-data"
+class="p-4 mt-5 mb-2 w-50 justify-content-center text-light bg_color container">
+
+<div class="text-center mt-3">
+  <h2 class="display-5">Comment on blog</h2>
+</div>
+
+<div class="form-group">
+  <label for="username"><strong> username</strong> </label>
+  <input type="text" class="form-control" id="username" name="username" value="#" required
+/>
+</div>
+<div  class="form-group">
+<label for="content"><strong>Comment</strong></label>
+<textarea class="form-control" type="text" id="content" name="content" rows="3" value="#"
+required>
+</textarea>
+</div>
+<button type="submit" class="btn btn-danger">Comment</button>
+</form>
 <%- include('./partials/footer.ejs') %>
 <%- include('./partials/scriptTag.ejs') %>
 <!-- Footer of the page -->
