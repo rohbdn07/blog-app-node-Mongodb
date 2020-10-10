@@ -37,11 +37,11 @@ app.set("view engine", "ejs");
  */
 
 app.use(bodyParser.json());
-app.use(
-  bodyParser.urlencoded({
+app.use(bodyParser.urlencoded({
     extended: true,
   })
 );
+
 
 //FileUpload middleware
 app.use(fileUpload());

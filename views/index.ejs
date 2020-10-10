@@ -72,7 +72,6 @@
           <p class="lead"><%= blog.description %></p>
           <p>Posted by :<%= blog.username %></p>
           <p>Published at :<%= blog.createdAt.toLocaleDateString() %></p>
-          <p>Posted by :<%= blog.content %></p>
           <% if(loginUser) {%>
           <a class="btn btn-danger btn-md" href="/edit/<%=blog.slug %>">Update</a>
           <br>

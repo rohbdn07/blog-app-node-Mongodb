@@ -15,7 +15,6 @@ const blogSchema = new Schema({
   },
   description: {
     type: String,
-
     required: true,
   },
   content: {
@@ -26,7 +25,7 @@ const blogSchema = new Schema({
 
   createdAt: {
     type: Date,
-    default: new Date(),
+    default: Date.now,
   },
   slug: {
     type: String,
