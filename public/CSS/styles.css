@@ -1,5 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Noto+Serif&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300&display=swap");
+ 
+ 
 
 body {
   /* background-color: black; */
@@ -29,9 +31,26 @@ body {
       rgba(2, 65, 78, 1) 100%) !important;
 }
 
-.details_bg {
-  background-color: white;
+.details__bg {
+  background-color: black;
 }
+.about__bg{
+  background-color: black;
+}
+.about__profile{
+  background-color: #2f3542;
+}
+.index__bg{
+  background-color: #575fcf;
+}
+.index__blogCard{
+  background-color: #2f3542;
+  color: #ffffff;
+}
+.index__profile{
+  background-color:#2f3542 ;
+}
+
 
 .blog_image img {
   width: 100vw;
@@ -75,3 +94,9 @@ body {
 strong {
   color: white;
 }
+
+.details__blogContent{
+  font-family: 'Montserrat', sans-serif;
+  background-color:#ffffff;
+}
+ 

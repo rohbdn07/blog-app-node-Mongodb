@@ -54,7 +54,7 @@
     </div>
   </nav>
   
-  <div class=" bg_color container-fluid d-flex">
+  <div class="container-fluid d-flex index__bg">
 
     <div class="m-5 container-fluid">
       <% if(loginUser){%>
@@ -68,7 +68,7 @@
         
       <% if (blogs.length > 0) { %> <% blogs.forEach(blog => { %>
   
-        <div class=" card shadow border border-info rounded text-dark mb-5 p-3  " style='width:50rem; height:40rem;'>
+        <div class="card shadow border border-info rounded index__blogCard mb-5 p-3  " style='width:50rem; height:40rem;'>
           <div class="index__image" style="background-image: url('<%=blog.image %>')"></div>
           
           <h1 class="display-4"><%= blog.title %></h1>
@@ -91,15 +91,14 @@
     </div>
   
     <!-- //User Profile..... -->
-    <div class="jumbotron container-fluid mr-5 bg-info mt-4 w-25 h-25 media-body">
+    <div class="jumbotron container-fluid mr-5 index__profile mt-4 w-25 h-25 media-body">
       <h2 class="text-light">User Profile</h2>
-      <br />
-      <div class="shadow p-5 m-2 nav-color border border-info rounded text-light">
-        <h1 class="display-4"> Rohit Bhandari</h1>
+     
+        <h3 class="display-4"> Rohit Bhandari</h3>
         <a class="btn btn-dark btn-md" href="#">FACEBOOK</a>
         <a class="btn btn-danger btn-md" href="#">GITHUB</a>
         <hr class="my-4" />
-      </div>
+     
     </div>
     </div>
   <%- include('./partials/footer.ejs') %>
