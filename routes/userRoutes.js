@@ -13,26 +13,28 @@ if (typeof localStorage === "undefined" || localStorage === null) {
 }
 
 router.post("/login", (req, res, next) => {
+    const username=req.body.username;
     const email = req.body.email;
     const password = req.body.password;
     const checkUser = User.findOne({
-        email: email,
+        email: email 
     });
     checkUser.exec((err, data) => {
         if (err) throw err;
         const getUserID = data._id;
         const hashedPassword = data.password;
-        if (bcrypt.compareSync(password, hashedPassword)) {
+        if (bcrypt.compareSync(password, hashedPassword)){
             let token = jwt.sign({
                     userID: getUserID
                 },
                 process.env.SECRETKEY,
                 {
-                    expiresIn:300, //expire(logout) in 5 min.
+                    expiresIn:3000, //expire(logout)
                 }
             );
             localStorage.setItem('userToken', token); //store JWT token as userToken in localstore(scratch folder)
-            localStorage.setItem('loginUser', email); //store login email as loginUser in localstore(scratch folder)
+            localStorage.setItem('loginUser',email); //store login email as loginUser in localstore(scratch folder)
+            localStorage.setItem('Loginusername', username);
             res.redirect('/blogs')
 
         } else {
@@ -41,7 +43,9 @@ router.post("/login", (req, res, next) => {
                 msg: "oops! Username or password not matched",
             });
         }
+     next();
     });
+   
 });
 
 //this is Login route page...
@@ -56,15 +60,16 @@ router.get("/login", (req, res, next) => {
 });
 
 //this is Register route page...
-router.get("/register", checkLoginUser, (req, res, next) => {
+router.get("/register", (req, res, next) => {
     res.render("register", {
         title: "registerPage",
         msg: "",
     });
+    next();
 });
 
 //register POST to database...
-router.post("/register", checkDuplicateEmailorUsername, (req, res, next) => {
+router.post("/register", (req, res, next) => {
     const username = req.body.username;
     const email = req.body.email;
     const password = req.body.password;
@@ -96,6 +101,7 @@ router.post("/register", checkDuplicateEmailorUsername, (req, res, next) => {
 router.get('/logout', (req, res, next) => {
     localStorage.removeItem('userToken');
     localStorage.removeItem('loginUser');
+    localStorage.removeItem('loginUsername');
     res.redirect('/login');
 });
 

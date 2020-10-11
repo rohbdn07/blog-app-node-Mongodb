@@ -17,7 +17,8 @@ if (typeof localStorage === "undefined" || localStorage === null) {
 //displaying all blogs on index page(home page) using GET method,
 //which are stored in mongodb..
 router.get("/blogs", (req, res) => {
-  const loginUser = localStorage.getItem('loginUser');
+  const loginUserEmail = localStorage.getItem('loginUser');
+  const loginUsername=localStorage.getItem('Loginusername');
   Blog.find({})
     .sort({
       createdAt: '-1', //blog will display in decending order.
@@ -26,11 +27,12 @@ router.get("/blogs", (req, res) => {
       res.render("index", {
         title: "All blogs",
         blogs: data,
-        loginUser: loginUser,
-
+        loginUser: loginUserEmail,
+        loginUsername:loginUsername,
 
       });
-      console.log('logged as:' + loginUser);
+      console.log('logged as:' + loginUserEmail);
+      console.log('logged as:' + loginUsername);
 
     })
     .catch((err) => {
@@ -95,13 +97,14 @@ router.get("/blogs/create", (req, res) => {
 
 
 //this is Create post route, It'll 1st stored the data to mongodb using POST method.
-router.post("/blogs", (req, res) => {
+router.post("/blogs",checkLoginUser, (req, res) => {
   // console.log(req.body)
   const loginUser = localStorage.getItem('loginUser');
   const file = req.files.file;
   const filename = file.name;
 
   console.log(filename);
+  console.log(req.user)
 
   file.mv(`public/posts/${filename}`, async (err) => {
     if (err) {
@@ -199,29 +202,46 @@ router.get("/edit/:slug", (req, res) => {
 });
 
 //SEARCH ROUTE....
-router.post('/search/', (req, res) => {
+// router.post('/search/', (req, res) => {
+//   const loginUser = localStorage.getItem('loginUser');
+//   const loginUsername=localStorage.getItem('loginUsername')
+//   let titleSearch = req.body.search;
+//   if (titleSearch != '') {
+//     var filterParameter = {
+//       $and: [{
+//         title: titleSearch.toLowerCase()
+//       }]
+//     }
+//   } else {
+//     var filterParameter = {};
+//   }
+//   const titleFilter = Blog.find(filterParameter);
+//   titleFilter.exec((err, data) => {
+//     res.render("index", {
+//       title: "All blogs",
+//       blogs: data,
+//       loginUser: loginUser,
+//       loginUsername:loginUsername,
+
+//     });
+//   })
+// })
+
+router.post('/search/',(req,res)=>{
   const loginUser = localStorage.getItem('loginUser');
-  let titleSearch = req.body.search;
-  if (titleSearch != '') {
-    var filterParameter = {
-      $and: [{
-        title: titleSearch.toLowerCase()
-      }]
-    }
-  } else {
-    var filterParameter = {};
-  }
-  const titleFilter = Blog.find(filterParameter);
+  const loginUsername=localStorage.getItem('loginUsername')
+  let userPattern=new RegExp('^'+req.body.search.toLowerCase());
+  const titleFilter= Blog.find({title:{$regex:userPattern}});
   titleFilter.exec((err, data) => {
     res.render("index", {
       title: "All blogs",
       blogs: data,
       loginUser: loginUser,
+      loginUsername:loginUsername,
 
     });
   })
-
-
+  
 })
 //router is exported to App.js.
 module.exports = router;

@@ -1,5 +1,7 @@
 const mongoose = require("mongoose");
 const slugify = require('slugify');
+const {ObjectId}=mongoose.Schema.Types;
+const User=require('./user');
 
 //Schema represent the database's structure and it's contents.
 const Schema = mongoose.Schema;
@@ -21,14 +23,6 @@ const blogSchema = new Schema({
     type: String,
     required: true,
   },
-  content: {
-    type: String,
-    required: true,
-  },
-  content: {
-    type: String,
-    required: true,
-  },
   image: String,
 
   createdAt: {
@@ -39,7 +33,12 @@ const blogSchema = new Schema({
     type: String,
     required: true,
 
-  }
+  },
+  postedBy:{
+    type:ObjectId,
+    ref:'User'
+  },
+   
 }, {
   timestamps: true,
 });

@@ -12,6 +12,14 @@ if (typeof localStorage === "undefined" || localStorage === null) {
 const checkLoginUser = (req, res, next) => {
   try {
     let decoded = jwt.verify(userToken, process.env.SECRETKEY);
+    decoded.exec((err,payload)=>{
+      if(err) return console.log('Authicatation error :'+err);
+      const {_id}=payload;
+      User.findById(_id).then(userdata=>{
+        req.user=userdata;
+        next();
+      })
+    })
   } catch (err) {
     res.redirect('/login');
 

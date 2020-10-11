@@ -2,6 +2,7 @@ const express = require("express");
 const morgon = require("morgan");
 const blogRoutes = require("./routes/blogRoutes");
 const userRoutes = require("./routes/userRoutes");
+const commentRoutes=require('./routes/commetRoute');
 const path = require("path");
 const router = express.Router();
 const mangoose = require("mongoose");
@@ -52,7 +53,7 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(morgon("dev"));
 
 //blog routes
-app.use(blogRoutes, userRoutes);
+app.use(blogRoutes, userRoutes, commentRoutes);
 
 // //Login and register routes...
 // app.use(userRoutes);
