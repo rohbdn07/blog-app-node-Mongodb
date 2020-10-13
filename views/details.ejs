@@ -57,24 +57,24 @@
   <!-- //Carousel images -->
   <%-include('./partials/carousel.ejs') %>
         <hr />
-        <div class="d-flex align-items-start">
-          <form action="/blogs" method="POST" enctype="multipart/form-data" class="p-4 w-25 h-25 justify-content-center text-light bg_color">
+        <div class="d-flex col-lg-12 align-items-start">
+          <form action="/blogs" method="POST" enctype="multipart/form-data" class="p-4 col-lg-2 mx-auto justify-content-center text-light bg_color rounded">
           
             <div class="text-center mt-3">
-                <h2 class="display-4">News report</h2>
+                <h2 class="display-4">Contact Me ?</h2>
             </div>
   
             <div class="form-group">
-              <label for="username"><strong> Email</strong> </label>
-              <input type="text" class="form-control" id="username" name="username" value="#" required/>
+              <label for="title"><strong> Title</strong> </label>
+              <input type="text" class="form-control" id="title" name="title" value="#" required/>
             </div>
             <div class="form-group">
-              <label for="content"><strong>Comment</strong></label>
-              <textarea class="form-control" type="text" id="content" name="content" rows="3" value="#" required>
+              <label for="message"><strong>Message</strong></label>
+              <textarea class="form-control" type="text" id="message" name="message" rows="3" value="#" required>
               </textarea>
             </div>
           </form>
-        <div class="blogs content p-5 text-dark container bg-muted details__blogContent">
+        <div class=" col-lg-7 p-5 text-dark container bg-muted details__blogContent">
           <div class="text-center">
             <h1 class="display-3 text-primary my-5 mx-auto"><%=blog.title.toUpperCase()%></h1>
           </div>
@@ -91,10 +91,10 @@
         </div>
         </div>
         <form action="/blogs" method="POST" enctype="multipart/form-data"
-        class="p-4 w-25 h-25 mx-auto justify-content-center text-light bg_color rounded">
+        class="p-4 col-lg-2 mx-auto justify-content-center text-light bg_color rounded">
         
         <div class="text-center mt-3">
-          <h2 class="display-4">Subscription</h2>
+          <h2 class="display-4">Subscribe to Newsletter</h2>
         </div>
 
         <div class="form-group">
@@ -105,11 +105,13 @@
    
   </form>
 </div>
-<hr>
+<hr class="bg-danger mt-5">
 <%-include('./partials/comment.ejs')%>
 <%- include('./partials/footer.ejs') %>
 <%- include('./partials/scriptTag.ejs') %>
 <!-- Footer of the page -->
+
+
 <script>
   //DELETE function. It 1st take the given element and assign it to variable.then,
   //run the Click EventListener and assign the variable the Endpont('/blogs/:id'), then
