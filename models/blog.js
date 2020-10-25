@@ -36,8 +36,13 @@ const blogSchema = new Schema({
   },
   postedBy:{
     type:ObjectId,
-    ref:'User'
+    ref:"User"
   },
+  comments:[{
+    type:Schema.Types.ObjectId,
+    ref:"Comment",
+    required:'comment is required'
+  }]
    
 }, {
   timestamps: true,

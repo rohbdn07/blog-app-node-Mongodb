@@ -50,7 +50,7 @@
         </div>
       </nav>    
 
-    <form action="/update/" method="POST" class="p-5 m-5 w-50 justify-content-center mx-auto bg_color ">
+    <form action="/edit/<%=blog.id%>?_method=PUT" method="POST" class="p-5 m-5 w-50 justify-content-center mx-auto bg_color ">
         <div class="text-center mt-3">
             <input type="hidden" name="id" value="<%= blog._id%>">
                 <h2><%= title%></h2>
@@ -67,20 +67,28 @@
         </div>
         <div class="form-group">
             <label for="content">Blog Content</label>
-            <textarea class="form-control" type='text' id="content" name='content'
-                value="<%=blog.content %>"></textarea>
+            <textarea class="form-control" type="text" id="content" name="content" value="<%-blog.content%>"
+                required>
+              </textarea>
         </div>
-        <div class="form-group form-check">
-            <input type="checkbox" class="form-check-input" id="exampleCheck1">
-            <label class="form-check-label" for="exampleCheck1">Set Private post</label>
-        </div>
+         
         <div class="form-group">
             <label for="title"><strong>Blog's picture</strong> </label>
             <input type="file" class="form-control-file" id="file" name="file">
         </div>
         <button type="submit" class="btn btn-danger">Update</button>
         </form>
+
+        <!-- //Footer section -->
         <%- include('./partials/footer.ejs') %>
+
+        <script src="/ckeditor/ckeditor/ckeditor.js"></script>
+        <script>
+         CKEDITOR.replace('content');
+        //  CKEDITOR.replace('content',{
+        //     plugins:'wysiwygarea,toolbar,basicstyles,link'
+        //   });
+        </script>
 </body>
 
 <%- include('./partials/scriptTag.ejs') %>

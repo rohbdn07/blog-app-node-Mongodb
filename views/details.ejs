@@ -56,7 +56,7 @@
   <br />
   <!-- //Carousel images -->
   <%-include('./partials/carousel.ejs') %>
-        <hr />
+  <hr class="bg-danger mt-5">
         <div class="d-flex col-lg-12 align-items-start">
           <form action="/blogs" method="POST" enctype="multipart/form-data" class="p-4 col-lg-2 mx-auto justify-content-center text-light bg_color rounded">
           
@@ -87,7 +87,7 @@
           <h4 class="text-info details__blogContent"><%= blog.description%></h4>
         </div>
         <div class="my-5 text-dark">
-            <h3 class="text-dark details__blogContent "><%- blog.content%></h3>
+            <p class="text-dark details__blogContent "><%- blog.content%></p>
         </div>
         </div>
         <form action="/blogs" method="POST" enctype="multipart/form-data"
@@ -106,7 +106,7 @@
   </form>
 </div>
 <hr class="bg-danger mt-5">
-<%-include('./partials/comment.ejs')%>
+ 
 <%- include('./partials/footer.ejs') %>
 <%- include('./partials/scriptTag.ejs') %>
 <!-- Footer of the page -->

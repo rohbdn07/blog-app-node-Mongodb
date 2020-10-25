@@ -9,6 +9,7 @@ const mangoose = require("mongoose");
 const bodyParser = require("body-parser");
 const _ = require("lodash");
 const fileUpload = require("express-fileupload");
+const methodOverride=require("method-override")
 require('dotenv').config();
 
 //express app
@@ -43,7 +44,8 @@ app.use(bodyParser.urlencoded({
   })
 );
 
-
+//Use of method Override...
+app.use(methodOverride("_method"))
 //FileUpload middleware
 app.use(fileUpload());
 
@@ -53,7 +55,7 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(morgon("dev"));
 
 //blog routes
-app.use(blogRoutes, userRoutes, commentRoutes);
+app.use(blogRoutes, userRoutes);
 
 // //Login and register routes...
 // app.use(userRoutes);

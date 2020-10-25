@@ -1,7 +1,12 @@
 
-<form action="/blogs/coments/" method="POST" 
+<form action="/blogs/:slug/comment" method="POST" 
   class="p-4 mt-5 mb-2 col-lg-5 justify-content-center text-light bg_color container">
-  <input type="hidden" class="form-control" id="post_id" name="post_id"
+  <% if(msg!=''){%>
+    <div class="alert bg-danger text-light">
+      <p><%=msg%></p>
+    </div>
+    <%}%>
+  <input type="hidden" class="form-control" id="post_id" name="slug"
     />
 
   <div class="text-center mt-3">
@@ -14,20 +19,33 @@
     />
   </div>
   <div  class="form-group">
-    <label for="comment"><strong>Comment</strong></label>
-    <textarea class="form-control" type="text" id="comment" name="comment" rows="3" value="comment"
+    <label for="content"><strong>Comment</strong></label>
+    <textarea class="form-control" type="text" id="content" name="content" rows="3" value="comment"
     required>
     </textarea>
   </div>
   <button type="submit" class="btn btn-danger">Comment</button>
   <hr class="bg-danger">
+
+   
+    <div class="text-center text-dark">
+      <h1 class="display-3 text-primary my-5 mx-auto"><%=comment.name.toUpperCase()%></h1>
+    </div>
+     
+   
+  <div class="text-center text-dark ">
+    <h4 class="text-info details__blogContent"><%= comment.comment%></h4>
+  </div>
+   
 </form>
 
-<script>
+
+
+<!-- <script>
   const comment = document.querySelector("btn");
   comment.addEventListener("click", (e) => {
-    const endPoint = `/blogs/coments/`;
-    //doing Ajax request to Server to delete...
+    const endPoint = `/blogs/:slug/comment`;
+    //doing Ajax request to Server to comment...
     fetch(endPoint, {
         method: "POST",
         body:{
@@ -43,6 +61,6 @@
       .catch((err) => console.log(err));
       return false;
   });
-</script>
+</script> -->
 
  
