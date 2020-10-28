@@ -93,52 +93,57 @@ router.get("/blogs/create", (req, res) => {
   });
 });
 
+//function for Create and edit post
+function saveBlogandRedirect (path){
+  return async(req,res)=>{
+    const loginUser = localStorage.getItem('loginUser');
+    const file = req.files.file;
+    const filename = file.name;
+    console.log(filename);
+    console.log(req.user)
+    file.mv(`public/posts/${filename}`, async (err) =>{
+    if (err) {
+      console.log("File uploading err:" + err)
+    };
+    // const blog = new Blog(req.body);
+      let blog =req.blog
+      blog.username= req.body.username
+      blog.title=req.body.title
+      blog.description=req.body.description
+      blog.content=req.body.content
+      blog.image= `/posts/${filename}`
+    
+    try {
+      blog = await blog.save();
+      console.log('blog is saved to db')
+      res.redirect('/blogs')
+      console.log('file saved to db');
+      } 
+      catch (err) {
+      res.render(`blogs/${path}`, {
+        title: 'not saved',
+        msg: 'opps! file not saved, Title name already exit!',
+        blogs: blog,
+        loginUser: loginUser,
 
+      });
+      console.log('data not saved' + '' + err)
+    }
+  })
+  };
+}
 
 //this is Create post route, It'll 1st stored the data to mongodb using POST method.
-router.post("/blogs",checkLoginUser, (req, res,next) => {
-  // console.log(req.body)
-  // const loginUser = localStorage.getItem('loginUser');
-  // const file = req.files.file;
-  // const filename = file.name;
-
-  // console.log(filename);
-  // console.log(req.user)
-
-  // file.mv(`public/posts/${filename}`, async (err) => {
-  //   if (err) {
-  //     console.log("File uploading err:" + err)
-  //   };
-  //   // const blog = new Blog(req.body);
-  //   let blog = new Blog({
-  //     username: req.body.username, 
-  //     title: req.body.title,
-  //     description: req.body.description,
-  //     content: req.body.content,
-  //     image: `/posts/${filename}`,
-  //   })
-  //   try {
-  //     blog = await blog.save();
-  //     res.redirect('/blogs')
-  //     console.log('file saved to db');
-  //   } catch (err) {
-  //     res.render('create', {
-  //       title: 'not saved',
-  //       msg: 'opps! file not saved, Title name already exit!',
-  //       blogs: blog,
-  //       loginUser: loginUser,
-
-  //     });
-  //     console.log('data not saved' + '' + err)
-  //   }
-  // });
-  req.blog=new Blog();
+router.post("/blogs",(req, res, next) => {
+  req.blog= new Blog();
   next();
-}, saveBlogandredirect("create"));
+}, saveBlogandRedirect("create"));
 
-router.put('/:id', (req,res)=>{
-  
-})
+//PUT route is using to edit the content
+router.put('/blogs/:id', async (req,res,next)=>{
+  req.blog= await Blog.findById(req.params.id);
+  next();
+}, saveBlogandRedirect('edit'))
 
 // this is single blog page route pass through '/blogs/:id'...
 router.get("/blogs/:slug", async (req, res) => {
@@ -164,10 +169,6 @@ router.get("/blogs/:slug", async (req, res) => {
 //it 1st delete the blog of that ID in mongodb . then,
 //send the response in JSON format and redirect it to '/blogs' route.
 router.delete("/blogs/:slug", (req, res) => {
-  // const id = req.params.id;
-  // Blog.findOne({
-  //     slug: req.params.slug
-  //   })
   Blog.findOneAndDelete({
       slug: req.params.slug
     })
@@ -183,7 +184,6 @@ router.delete("/blogs/:slug", (req, res) => {
 router.get("/edit/:id", (req, res) => {
   const id = req.params.id;
   const loginUser = localStorage.getItem('loginUser');
-  // Blog.findByIdAndUpdate(id)
   Blog.findById({
       _id: id
     }).then((data) => {
@@ -197,43 +197,7 @@ router.get("/edit/:id", (req, res) => {
     .catch((err) => console.log(err));
 });
 
-//function for Create and edit post
-function saveBlogandredirect (path){
-  return async(req,res)=>{
-    const loginUser = localStorage.getItem('loginUser');
-    const file = req.files.file;
-    const filename = file.name;
-    console.log(filename);
-    console.log(req.user)
-    file.mv(`public/posts/${filename}`, async (err) => {
-    if (err) {
-      console.log("File uploading err:" + err)
-    };
-    // const blog = new Blog(req.body);
-      let blog=req.blog;
-      blog.username= req.body.username
-      blog.title=req.body.title
-      blog.description=req.body.description
-      blog.content=req.body.content
-      blog.image= `/posts/${filename}`
-    })
-    try {
-      blog = await blog.save();
-      res.redirect('/blogs')
-      console.log('file saved to db');
-      } 
-      catch (err) {
-      res.render(`/blogs/${path}`, {
-        title: 'not saved',
-        msg: 'opps! file not saved, Title name already exit!',
-        blogs: blog,
-        loginUser: loginUser,
 
-      });
-      console.log('data not saved' + '' + err)
-    }
-  };
-}
 
 //SEARCH ROUTES...
 router.post('/search/',(req,res)=>{

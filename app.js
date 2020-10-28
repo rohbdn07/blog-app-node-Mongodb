@@ -44,8 +44,6 @@ app.use(bodyParser.urlencoded({
   })
 );
 
-//Use of method Override...
-app.use(methodOverride("_method"))
 //FileUpload middleware
 app.use(fileUpload());
 
@@ -54,8 +52,12 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.use(morgon("dev"));
 
+//Use of method Override...
+app.use(methodOverride("_method"))
+
 //blog routes
 app.use(blogRoutes, userRoutes);
+app.use(commentRoutes)
 
 // //Login and register routes...
 // app.use(userRoutes);
