@@ -107,6 +107,7 @@ function saveBlogandRedirect (path){
     };
     // const blog = new Blog(req.body);
       let blog =req.blog
+      console.log(blog)
       blog.username= req.body.username
       blog.title=req.body.title
       blog.description=req.body.description
@@ -120,7 +121,7 @@ function saveBlogandRedirect (path){
       console.log('file saved to db');
       } 
       catch (err) {
-      res.render(`blogs/${path}`, {
+      res.render(`${path}`, {
         title: 'not saved',
         msg: 'opps! file not saved, Title name already exit!',
         blogs: blog,

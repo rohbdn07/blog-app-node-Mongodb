@@ -21,7 +21,7 @@ const blogSchema = new Schema({
   },
   content: {
     type: String,
-    required: true,
+    required: false,
   },
   image: String,
 
