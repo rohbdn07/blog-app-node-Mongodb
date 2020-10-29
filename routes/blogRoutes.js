@@ -107,7 +107,7 @@ function saveBlogandRedirect (path){
     };
     // const blog = new Blog(req.body);
       let blog =req.blog
-      console.log(blog)
+      //console.log(blog)
       blog.username= req.body.username
       blog.title=req.body.title
       blog.description=req.body.description

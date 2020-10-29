@@ -12,13 +12,14 @@ if (typeof localStorage === "undefined" || localStorage === null) {
     localStorage = new LocalStorage("./scratch");
 }
 
-router.post("/login", (req, res, next) => {
+router.post("/login",(req, res, next) => {
     const username=req.body.username;
     const email = req.body.email;
     const password = req.body.password;
     const checkUser = User.findOne({
         email: email 
     });
+     
     checkUser.exec((err, data) => {
         if (err) throw err;
         const getUserID = data._id;
@@ -29,7 +30,7 @@ router.post("/login", (req, res, next) => {
                 },
                 process.env.SECRETKEY,
                 {
-                    expiresIn:3000, //expire(logout)
+                    expiresIn:30000, //expire(logout)
                 }
             );
             localStorage.setItem('userToken', token); //store JWT token as userToken in localstore(scratch folder)
