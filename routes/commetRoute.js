@@ -64,7 +64,7 @@ router.post("/blogs/:slug/comment", async(req, res) => {
 
 
 //Get request for the comment section...
-router.get("/blogs/:slug/comment", async(req, res) => {
+router.get("/blogs/:slug", async(req, res) => {
         // const id = req.params.id;
         const loginUser = localStorage.getItem('loginUser');                        
         const blog = await Blog.findOne({
