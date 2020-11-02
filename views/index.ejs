@@ -57,11 +57,11 @@
   
   <main class="card-body container-fluid index__bg">
     <% if(loginUser){%>
-      <div class="my-1 py-3 text-dark ">
+      <div class="my-1 py-3 text-light ">
         <h2>Welcome, <%=loginUsername%> </h2><%=loginUser%>
       </div>
       <%}%>
-    <h2 class="text-dark">All Blogs</h2>
+    <h2 class="text-light">All Blogs</h2>
     <br />
     <div class="col-lg-11 container d-flex justify-content-between flex-wrap  ">
       <% if (blogs.length > 0) { %> <% blogs.forEach(blog => { %>

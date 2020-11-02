@@ -3,6 +3,7 @@ const morgon = require("morgan");
 const blogRoutes = require("./routes/blogRoutes");
 const userRoutes = require("./routes/userRoutes");
 const commentRoutes=require('./routes/commetRoute');
+const subscribe = require('./routes/subscribe');
 const path = require("path");
 const router = express.Router();
 const mangoose = require("mongoose");
@@ -10,6 +11,7 @@ const bodyParser = require("body-parser");
 const _ = require("lodash");
 const fileUpload = require("express-fileupload");
 const methodOverride=require("method-override")
+ 
 require('dotenv').config();
 
 //express app
@@ -56,8 +58,9 @@ app.use(morgon("dev"));
 app.use(methodOverride("_method"))
 
 //blog routes
-app.use(blogRoutes, userRoutes);
-app.use(commentRoutes)
+app.use(blogRoutes, userRoutes, subscribe);
+app.use(commentRoutes);
+
 
 // //Login and register routes...
 // app.use(userRoutes);

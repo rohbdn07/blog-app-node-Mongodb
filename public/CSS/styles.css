@@ -43,11 +43,15 @@ body {
   background-color: #2f3542;
 }
 .index__bg{
-  /* background-color: #575fcf; */
-  background-color: #dcdde1;
+  background-color: black;
+  
 }
 .index__blogCard{
-  background-color: #2f3542;
+  background: linear-gradient(217deg, rgba(3, 1, 1, 0.877), rgba(255,0,0,0) 70.71%),
+  linear-gradient(127deg, rgba(38, 46, 38, 0.473), rgba(0,255,0,0) 70.71%),
+  linear-gradient(336deg, rgba(0,0,255,.8), rgba(0,0,255,0) 70.71%);
+  border-radius: 15px;  
+  background-color: #d63031;
   color: #ffffff;
   transition: 0.70s;
   -webkit-transition: 0.70s;
@@ -58,7 +62,7 @@ body {
   margin-left: auto;
 }
 .index__blogCard:hover{
-  background-color: #d63031;
+  background-color: black;
   transition: 0.70s;
   -webkit-transition: 0.70s;
   -moz-transition: 0.70s;
@@ -120,7 +124,7 @@ strong {
 
 .details__blogContent{
   font-family: 'Montserrat', sans-serif;
-  background-color:black;
+ background-color: black;
 
 }
  
