@@ -34,7 +34,7 @@ body {
 }
 
 .details__bg {
-  background-color: black;
+  background-color: #dfe4ea;
 }
 .about__bg{
   background-color: black;
@@ -61,7 +61,7 @@ body {
   margin-right: auto;
   margin-left: auto;
 }
-.index__blogCard:hover{
+/* .index__blogCard:hover{
   background-color: black;
   transition: 0.70s;
   -webkit-transition: 0.70s;
@@ -73,7 +73,12 @@ body {
   -o-transform: rotate(360deg);
   -ms-transform: rotate(360deg);
   transform: rotate(360deg);
+} */
+.index__blogCard:hover{
+  background-color: black;
+  zoom: 1.003;
 }
+
 .index__profile{
   background-color:#2f3542 ;
 }
