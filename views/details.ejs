@@ -76,7 +76,7 @@
           </form>
         <div class=" col-lg-7 p-5 container bg-muted details__blogContent">
             <div class="text-center">
-              <h1 class="display-3 text-primary my-5 mx-auto"><%=blog.title.toUpperCase()%></h1>
+              <h1 class="display-3 text-light my-5 mx-auto"><%=blog.title.toUpperCase()%></h1>
             </div>
             <div class="details__carousel upload-image rounded mb-5 mx-auto" style="background-image: url('<%=blog.image %>')">
             </div>
@@ -90,7 +90,7 @@
               <p class="text-dark details__blogContent "><%- blog.content%></p>
             </div>
         </div>
-        <form action="/blogs" method="POST" enctype="multipart/form-data"
+        <form action="/blogs/subscribe" method="POST"  
         class="p-4 col-lg-2 mx-auto justify-content-center text-light bg_color rounded">
         
         <div class="text-center mt-3">
@@ -98,10 +98,13 @@
         </div>
 
         <div class="form-group">
-          <label for="username"><strong> Email</strong> </label>
-          <input type="text" class="form-control" id="username" name="username" value="#" required
+          <label for="email"><strong> Email</strong> </label>
+          <input type="email" class="form-control" id="email" name="email" required
         />
         </div>
+        <button class="btn btn-outline-primary my-sm-0 mr-5" type="submit">
+          Send
+        </button>
    
   </form>
 </div>
