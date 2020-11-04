@@ -2,7 +2,7 @@ Creating a Blog app using Nodejs, Express Js, ejs tamplate and mongodb.
 
 # Blog-app-node-Mongodb
 
-Build the Blog app Using Ejs template, Node Js, Express, and Mongodb. The app is used to create blog with content by the admin. The admin have right to create, delete, edit and post.
+Build the Blog app Using Ejs template, Node Js, Express, and Mongodb. The app is used to create blog with content by the admin. The admin has right to create, delete, edit and post.
 
 ### Deployed at Heroku
 
