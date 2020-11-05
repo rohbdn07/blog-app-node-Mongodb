@@ -1,6 +1,4 @@
 const express = require("express");
-const router = express.Router();
-const path = require("path");
 const User = require("../models/user");
 const jwt = require("jsonwebtoken");
 require('dotenv').config();
@@ -64,7 +62,4 @@ checkDuplicateEmailorUsername = (req, res, next) => {
 
 module.exports = checkDuplicateEmailorUsername;
 module.exports = checkLoginUser;
-// module.exports = {
-//   checkLoginUser,
-//   checkDuplicateEmailorUsername,
-// };
+ 

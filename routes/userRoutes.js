@@ -30,7 +30,7 @@ router.post("/login",(req, res, next) => {
                 },
                 process.env.SECRETKEY,
                 {
-                    expiresIn:30000, //expire(logout)
+                    expiresIn:'120s', //expire(logout)
                 }
             );
             localStorage.setItem('userToken', token); //store JWT token as userToken in localstore(scratch folder)

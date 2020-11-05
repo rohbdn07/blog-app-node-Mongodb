@@ -1,7 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Noto+Serif&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300&display=swap");
  
- 
+
+* {
+  box-sizing: border-box;
+}
 
 body {
   /* background-color: black; */
@@ -110,7 +113,7 @@ body {
 }
 
 .index__image {
-  min-width: 290px;
+  width: 290px;
   height: 200px;
   background-position: center center;
   background-size: cover;
