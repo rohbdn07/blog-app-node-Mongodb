@@ -82,19 +82,9 @@
         </div>
         <button type="submit" class="btn btn-danger">Update</button>
         </form>
-n
         <!-- //Footer section -->
         <%- include('./partials/footer.ejs') %>
 
-        <script src="/ckeditor/ckeditor/ckeditor.js"></script>
-        <script>
-         CKEDITOR.replace('content');
-        //  CKEDITOR.replace('content',{
-        //     plugins:'wysiwygarea,toolbar,basicstyles,link'
-        //   });
-        </script>
+        <%- include('./partials/scriptTag.ejs') %>
 </body>
-
-<%- include('./partials/scriptTag.ejs') %>
-
 </html>
