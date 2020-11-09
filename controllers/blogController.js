@@ -1,11 +1,12 @@
 //blog_get_all, blog_get_about, blog_get_create,blog_post,blog_put, blog_get_id, blog_delete, blog_get_edit_id, blog_search
-
 const Blog = require("../models/blog");
+ require('dotenv').config();
 
+//Local storage
 if (typeof localStorage === "undefined" || localStorage === null) {
-    var LocalStorage = require("node-localstorage").LocalStorage;
-    localStorage = new LocalStorage("./scratch");
-  }
+  var LocalStorage = require("node-localstorage").LocalStorage;
+  localStorage = new LocalStorage("./scratch");
+}
 
 const blog_get_all=(req,res)=>{
     const loginUserEmail = localStorage.getItem('loginUser');
@@ -50,69 +51,88 @@ const blog_get_create=(req,res)=>{
   });
 }
 
-//function for Create and edit post
-function saveBlogandRedirect (path){
-    return async(req,res)=>{
-      const loginUser = localStorage.getItem('loginUser');
-      const file = req.files.file;
-      const filename = file.name;
-      console.log(filename);
-      console.log(req.user)
-      file.mv(`public/posts/${filename}`, async (err) =>{
-      if (err) {
-        console.log("File uploading err:" + err)
-      };
-      // const blog = new Blog(req.body);
-        let blog =req.blog
-        //console.log(blog)
-        blog.username= req.body.username
-        blog.title=req.body.title
-        blog.description=req.body.description
-        blog.content=req.body.content
-        blog.image= `/posts/${filename}`
-      
-      try {
-        blog = await blog.save();
-        console.log('blog is saved to db')
-        res.redirect('/blogs')
-        console.log('file saved to db');
-        } 
-        catch (err) {
-        res.render(`${path}`, {
-          title: 'not saved',
-          msg: 'opps! file not saved, Title name already exit!',
-          blogs: blog,
-          loginUser: loginUser,
-  
-        });
-        console.log('data not saved' + '' + err)
-      }
-    })
+const blog_post= async(req,res)=>{
+    const loginUser = localStorage.getItem('loginUser');
+    const file = req.files.file;
+    const filename = file.name;
+    console.log(filename);
+    console.log(req.username);
+    file.mv(`public/posts/${filename}`, async (err) =>{
+    if (err) {
+      console.log("File uploading err:" + err)
     };
+    
+    let blog = new Blog();
+      blog.username= req.body.username
+      blog.title=req.body.title
+      blog.description=req.body.description
+      blog.content=req.body.content
+      blog.image= `/posts/${filename}`
+    
+    try {
+      await blog.save();
+      console.log('blog is saved to db')
+      res.redirect('/blogs')
+      console.log('file saved to db');
+      } 
+      catch (err) {
+      res.render("create", {
+        title: 'not saved',
+        msg: 'opps! file not saved, Title name already exit!',
+        blogs: blog,
+        loginUser: loginUser,
+      });
+      console.log('data not saved' + '' + err)
   }
+});
+}
 
-const blog_post=(async(req,res,next)=>{
-req.blog= new Blog();
-next();
-},saveBlogandRedirect("create"));
-
-const blog_put=(async(req,res,next)=>{
-    req.blog= await Blog.findById(req.params.id);
-    next();
-  }, saveBlogandRedirect('edit'));
+const blog_put =async(req,res)=>{
+    const loginUser = localStorage.getItem('loginUser');
+    const file = req.files.file;
+    const filename = file.name;
+    console.log(filename);
+    console.log(req.username);
+    file.mv(`public/posts/${filename}`, async (err) =>{
+    if (err) {
+      console.log("File uploading err:" + err)
+    };
+    let blog= await Blog.findById(req.params.id);
+      blog.username= req.body.username
+      blog.title=req.body.title
+      blog.description=req.body.description
+      blog.content=req.body.content
+      blog.image= `/posts/${filename}`
+    
+    try {
+      await blog.save();
+      console.log('blog is saved to db')
+      res.redirect('/blogs')
+      console.log('file saved to db');
+      } 
+      catch (err) {
+      res.render("edit", {
+        title: 'not saved',
+        msg: 'opps! file not saved, Title name already exit!',
+        blogs: blog,
+        loginUser: loginUser,
+      });
+      console.log('data not saved' + '' + err)
+  }
+});
+}
 
 const blog_get_id= async (req,res)=>{
     const loginUser = localStorage.getItem('loginUser');
     const blog = await Blog.findOne({
       slug: req.params.slug
     });
-  
+    
     try {
       res.render("details", {
         title: "Blog details",
         blog:blog,
-        loginUser: loginUser,
-        
+        loginUser: loginUser, 
       });
     } catch {
       (err) => console.log(err);
@@ -141,7 +161,6 @@ const blog_get_edit_id=(req,res)=>{
           title: "Update blog",
           blog: data,
           loginUser: loginUser,
-  
         });
       })
       .catch((err) => console.log(err));
@@ -158,10 +177,9 @@ const blog_post_search=(req,res)=>{
         blogs: data,
         loginUser: loginUser,
         loginUsername:loginUsername,
-  
-      });
-    })
-}
+        });
+    });
+};
 module.exports={
     blog_get_all,
     blog_get_about,
