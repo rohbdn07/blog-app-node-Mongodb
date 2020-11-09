@@ -46,9 +46,9 @@
   </nav>
   <br />
   <% if(loginUser){%>
-        <div class="deleteIcon">
-          <a class="btn btn-outline-danger w-25 d-flex justify-content-sm-end" data-doc="<%=blog.slug%>"
-            role="button">Delete
+        <div class="deleteIcon d-flex justify-content-end mr-5">
+          <a class="btn btn-danger " data-doc="<%=blog.slug%>"
+            role="button"><i class="fas fa-trash"></i>
           </a>
         </div>
         <%}%>
@@ -58,7 +58,7 @@
   <%-include('./partials/carousel.ejs') %>
   <hr class="bg-danger mt-5">
         <div class="d-flex col-lg-12 align-items-start">
-          <form action="/blogs" method="POST" enctype="multipart/form-data" class="p-4 col-lg-2 mx-auto justify-content-center text-light bg_color rounded">
+          <form action="/blogs" method="POST" enctype="multipart/form-data" class="p-4 col-lg-2 mx-auto justify-content-center text-light bg_color rounded details__contact__mobile">
           
             <div class="text-center mt-3">
                 <h2 class="display-5">Contact Me ?</h2>
@@ -78,7 +78,8 @@
             <div class="text-center">
               <h1 class="display-4 text-light my-5 mx-auto"><%=blog.title.toUpperCase()%></h1>
             </div>
-            <div class="details__carousel upload-image rounded mb-5 mx-auto" style="background-image: url('<%=blog.image %>')">
+            <div class="details__image center mb-5 " >
+              <img src="<%=blog.image %>" alt="img">
             </div>
             <div class="text-center">
               <h6 class="grey-text">Published at :<%= blog.createdAt%></h6>
@@ -91,7 +92,7 @@
             </div>
         </div>
         <form action="/blogs/subscribe" method="POST"  
-        class="p-4 col-lg-2 mx-auto justify-content-center text-light bg_color rounded">
+        class="p-4 col-lg-2 mx-auto justify-content-center text-light bg_color rounded details__newsletter__mobile">
         
         <div class="text-center mt-3">
           <h2 class="display-5">Subscribe to Newsletter</h2>

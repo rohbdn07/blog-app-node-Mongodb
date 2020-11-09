@@ -3,19 +3,38 @@
 <%- include('./partials/head.ejs') %>
 
 <body>
-  <div class="blog_image">
+  <!-- top nav -->
+<div class="navbar top__nav">
+  <a class="navbar-brand" href="/">
+    <img src="https://i.imgur.com/Yunghri.png" class="d-inline-block align-top" alt="" loading="lazy">
+  </a>
+  <% if(!loginUser){%>
+   <a class="nav-link text-light" href="/login"> <span><i class="fas fa-sign-in-alt"></i>Login</span> </a>
+   <!-- <a class="nav-link" href="/register"> Register  <span class="sr-only">(current)</span></a> -->
+  <%}%>
+  <% if(loginUser){%>
+    
+      <a class="nav-link text-light" href="/logout"> <i class="fas fa-sign-in-alt"></i>LogOut</a>
+    
+    <%}%>
+</div>
+  <div class="index__Topimage">
     <img src="/images/blogImage01.jpg" class="img-fluid" alt="blogImage" />
     
   </div>
   <nav class="navbar sticky-top navbar-expand-lg navbar-light nav-color">
-    <a class="navbar-brand" href="/"><img src="https://i.imgur.com/Yunghri.png" alt="logo" /></a>
+    <!-- <a class="navbar-brand" href="/"><img src="https://i.imgur.com/Yunghri.png" alt="logo" /></a> -->
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
       aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
     <div class="collapse navbar-collapse " id="navbarSupportedContent">
+      <a class="navbar-brand" href="/">
+        <img src="https://i.imgur.com/Yunghri.png" width="100" height="30" class="d-inline-block align-top" alt="" loading="lazy">
+      </a>
       <ul class="navbar-nav mr-auto">
+       
         <li class="nav-item active">
           <a class="nav-link" href="/">Blogs<span class="sr-only">(current)</span></a>
         </li>
@@ -28,45 +47,28 @@
               class="sr-only">(current)</span></a>
         </li>
         <%}%>
-  
-        <% if(!loginUser){%>
-        <li class="nav-item active">
-          <a class="nav-link" href="/login"> AdminLogin  <span class="sr-only">(current)</span></a>
-        </li>
-        <%}%>
-        <!-- <li class="nav-item active">
-          <a class="nav-link" href="/register"> Register  <span class="sr-only">(current)</span></a>
-        </li> -->
-        
-        <% if(loginUser){%>
-        <li class="nav-item active">
-          <a class="nav-link" href="/logout"> LogOut </a>
-        </li>
-        <%}%>
-  
       </ul>
   
       <form action="/search/" class="form-inline my-2 my-lg-0" method="POST">
         <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="search"/>
-        <button class="btn btn-outline-success my-2 my-sm-0 mr-5" type="submit">
-          Search
+        <button class="btn btn-outline-dark text-light my-2 my-sm-0 mr-5" type="submit"><i class="fas fa-search"></i>
         </button>
       </form>
     </div>
   </nav>
   
-  <main class="card-body container-fluid index__bg">
+  <main class="container-fluid index__bg p-5">
     <% if(loginUser){%>
-      <div class="my-1 py-3 text-light ">
-        <h2>Welcome, <%=loginUsername%> </h2><%=loginUser%>
+      <div class="py-3 text-light ">
+        <h2 class="welcome__mobile">Welcome, <%=loginUsername%> </h2><%=loginUser%>
       </div>
       <%}%>
-    <h2 class="text-light">All Blogs</h2>
+    <h2 class="text-light welcome__mobile">All Blogs</h2>
     <br />
-    <div class="col-lg-12 container d-flex justify-content-between flex-wrap">
+    <div class="col-lg-11 col-sm-5 container d-flex justify-content-between flex-wrap ">
       <% if (blogs.length > 0) { %> <% blogs.forEach(blog => { %>
-        <div class="card col-lg-3 card-img-top shadow border border-info rounded index__blogCard m-5 p-3 " >
-          <div class="index__image" style="background-image: url('<%=blog.image %>')"></div>
+        <div class="card col-lg-3 container card-img-top index__blogCard index_blogCard_mobile border border-info rounded p-3 m-3" >
+            <img src="<%=blog.image %>"alt="img" style="width:100%"/>
             <h1 class="display-5"><%= blog.title %></h1>
            
             <p class="lead"><%= blog.description %></p>
@@ -92,9 +94,9 @@
       <div class=" col-lg-12 text-center index__profile m-auto h-25 p-5 media-body">
         <h2 class="text-dark">User Profile</h2>
         <h3 class="display-4"> Rohit Bhandari</h3>
-        <a class="btn btn-dark btn-md" target="_blank" href="https://rohitbhandari13.web.app/">PORTFOLIO</a>
-        <a class="btn btn-primary btn-md" target="_blank" href="https://www.linkedin.com/in/rohit-bhandari-5b4994177/">LINKEDIN</a>
-        <a class="btn btn-danger btn-md" target="_blank" href="https://github.com/rohbdn07">GITHUB</a>
+        <a class="btn btn-dark btn-md" target="_blank" href="https://rohitbhandari13.web.app/"><i class="fas fa-user"></i></a>
+        <a class="btn btn-primary btn-md" target="_blank" href="https://www.linkedin.com/in/rohit-bhandari-5b4994177/"><i class="fab fa-linkedin"></i></a>
+        <a class="btn btn-danger " target="_blank" href="https://github.com/rohbdn07"><i class="fa fa-github" aria-hidden="true"></i></a>
         <hr class="my-4" />
       </div>
      
