@@ -76,7 +76,7 @@
           </form>
         <div class=" col-lg-7 p-5 container bg-muted details__blogContent">
             <div class="text-center">
-              <h1 class="display-4 text-light my-5 mx-auto"><%=blog.title.toUpperCase()%></h1>
+              <h1 class="display-4 my-5 mx-auto"><%=blog.title.toUpperCase()%></h1>
             </div>
             <div class="details__image center mb-5 " >
               <img src="<%=blog.image %>" alt="img">
@@ -84,11 +84,11 @@
             <div class="text-center">
               <h6 class="grey-text">Published at :<%= blog.createdAt%></h6>
             </div>
-            <div class="text-center text-dark ">
+            <div class="text-center">
               <h4 class="text-info details__blogContent"><%= blog.description%></h4>
             </div>
             <div class="my-5">
-              <p class="text-dark details__blogContent "><%- blog.content%></p>
+              <p class="details__blogContent "><%- blog.content%></p>
             </div>
         </div>
         <form action="/blogs/subscribe" method="POST"  
