@@ -6,6 +6,8 @@ Build the Blog app Using Ejs template, Node Js, Express, and Mongodb. The app is
 
 ### Deployed at Heroku
 
+https://rohitbhandari-blogs.herokuapp.com/ 
+
 # File Structure
 
 The folder architecture is based on Models, Views, and Controllers (MVC) application. The project structure will look like this:
